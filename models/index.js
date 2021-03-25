@@ -1,3 +1,4 @@
 const User = require('./User');
+const Spell = require('./Spell')
 
-module.exports = { User };
+module.exports = { User, Spell };
