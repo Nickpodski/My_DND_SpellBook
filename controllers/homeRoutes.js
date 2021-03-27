@@ -1,20 +1,45 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { User, Spell, UserSpell } = require('../models');
+// const { Spell } = require('../models');
 const withAuth = require('../utils/auth');
-
-router.get('/', withAuth, async (req, res) => {
+// put back auth
+router.get('/', async (req, res) => {
   try {
+    // const userData = await User.findByPk(req.session.user_id, {
+    //   include: [{ model: Spell, through: UserSpell }]
+    // });
+    console.log(req.session.user_id)
     const userData = await User.findAll({
-      attributes: { exclude: ['password'] },
-      order: [['name', 'ASC']],
+      include: [{model: Spell, through: UserSpell}]
     });
+
+    // const users = userData.get({ plain: true });
+
+    // console.log(users)
+    // console.log(userData);
+      res.json(userData);
+    // res.render('homepage', {
+    //   // users.spells,
+    //   logged_in: req.session.logged_in,
+    // });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+// add auth
+router.get('/all', async (req, res) => {
+  try {
+    const userData = await UserSpell.findAll({});
 
     const users = userData.map((project) => project.get({ plain: true }));
 
-    res.render('homepage', {
-      users,
-      logged_in: req.session.logged_in,
-    });
+    // console.log(users)
+    // console.log(userData);
+    res.json(userData)
+;    // res.render('homepage', {
+    //   users,
+    //   logged_in: req.session.logged_in,
+    // });
   } catch (err) {
     res.status(500).json(err);
   }

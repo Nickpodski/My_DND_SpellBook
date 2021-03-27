@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require('sequelize');
-// const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
 class Spell extends Model {}
@@ -17,7 +16,7 @@ Spell.init(
       allowNull: false,
     },
     desc: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     page: {
