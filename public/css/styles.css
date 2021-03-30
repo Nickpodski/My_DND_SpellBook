@@ -1,0 +1,239 @@
+body {
+  background-image: url("https://cdn.pixabay.com/photo/2018/03/29/13/15/candle-3272201_960_720.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 12px 1px;
+  /* ^ to get blur to cover more of bg w/o harsh line */
+  overflow: hidden;
+  display: inline-table
+}
+
+/* !!!!!!!!!!!fix bg blur */
+h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 4.2rem;
+  line-height: 110%;
+  /* margin: 2.8rem 0 1.68rem 0; */
+  display: inline-flex;
+  color: red;
+  position: absolute;
+  margin: 6px 22px;
+}
+
+/* BOOK */
+#book {
+  width: 800px;
+  height: 500px;
+  margin: 77px 174px;
+}
+
+#book .turn-page {
+  background-color: white;
+}
+
+/* Front Cover  */
+#book .cover {
+  background-image: url("https://cdn.pixabay.com/photo/2018/07/16/16/55/background-image-3542403_960_720.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#book .cover h1 {
+  font-family: 'Cinzel', serif;
+  color: red;
+  text-align: center;
+  font-size: 42px;
+  line-height: 500px;
+  margin: -128px 0px 0px 70px;
+}
+
+/* #book page-2{
+        background-image: url('https://cdn.pixabay.com/photo/2017/01/29/17/13/background-image-2018761_960_720.jpg');
+    } */
+
+/* Back of front-cover     */
+.backCover {
+  background-image: url("https://cdn.pixabay.com/photo/2020/06/14/16/31/flyers-5298491__340.jpg");
+  background-position:center;
+  background-size: cover;
+  /* margin: 97px;
+        font-size: 129%;
+        text-align: -webkit-center; */
+}
+/* .backCover {
+  font-size: 129%;
+  text-align: -webkit-center;
+} */
+.accountPage {
+  background-image: url("https://cdn.pixabay.com/photo/2017/01/29/17/13/background-image-2018761_960_720.jpg");
+  background-position: -55px 70px;
+}
+
+#book .loader {
+  /* background-image: url(loader.gif); */
+  width: 24px;
+  height: 24px;
+  display: block;
+  position: absolute;
+  top: 238px;
+  left: 188px;
+}
+
+#book .data {
+  text-align: center;
+  font-size: 40px;
+  /* color: red; */
+  line-height: 500px;
+}
+
+#controls {
+  width: 800px;
+  text-align: center;
+  margin: 20px 0px;
+  font: 30px arial;
+}
+
+#controls input,
+#controls label {
+  font: 30px arial;
+}
+/*     
+    #book .odd{
+        background-image:-webkit-linear-gradient(left, #FFF 95%, #ddd 100%);
+        background-image:-moz-linear-gradient(left, #FFF 95%, #ddd 100%);
+        background-image:-o-linear-gradient(left, #FFF 95%, #ddd 100%);
+        background-image:-ms-linear-gradient(left, #FFF 95%, #ddd 100%);
+    }
+    
+    #book .even{
+        background-image:-webkit-linear-gradient(right, #FFF 95%, #ddd 100%);
+        background-image:-moz-linear-gradient(right, #FFF 95%, #ddd 100%);
+        background-image:-o-linear-gradient(right, #FFF 95%, #ddd 100%);
+        background-image:-ms-linear-gradient(right, #FFF 95%, #ddd 100%);
+    } */
+
+/************************************************** LOGIN PAGE **************************************** */
+/* Centers form */
+.allRows {
+  /* margin-left: 28px; */
+  font-family: 'Cormorant Unicase', serif;
+  font-weight: 700;
+  /* position: fixed; */
+  width: 100%;
+  align-content: center;
+  text-align-last: center;
+  height: 100%;
+  padding: 15px;
+  /* margin: 0px; */
+}
+
+.row .col.s12 {
+  width: 88%;
+  margin-left: auto;
+  left: 41px;
+  right: auto;
+}
+
+/* top-margin for form */
+/* .userNameRow {
+    margin: 10px 0px 30px 0px;
+} */
+
+/* Centering Belongs to? */
+#belongsToQ {
+  font-size: 40px;
+  /* margin: 0px 0px 33px 23px; */
+  width: 126%;
+  /* text-align: -webkit-auto; */
+}
+/* distance between q? and input line */
+#user_name {
+  margin: 135px 0px 10px 0px;
+  /* margin: 140px 0px 0px 35px;
+  text-align: center;
+  width: 170%; */
+}
+
+label {
+  color: red;
+}
+/* 
+#email, #password {
+    text-align: center;
+} */
+
+
+/* adds margin to form - from userName row */
+/* .userNameRow {
+  margin-top: 60px;
+} */
+
+/* center all labels */
+/* label { */
+  /* margin-left: 100px; */
+  /* text-align: center;
+} */
+
+/* whole "user name question and input" row*/
+/* #book > div:nth-child(3) > div > div > div > form > div.row.userNameRow > div {
+  margin-left: 108px;
+} */
+
+/* User name input bar */
+/* #user_name {
+  margin-top: 78px;
+  text-align: center;
+  font-size: 20px;
+} */
+
+/* #email {
+    margin: 20px 0px 0px 65px;
+    text-align: center;
+    font-size: 20px;
+} */
+
+
+
+/* label color */
+.input-field label {
+  color: #000;
+  text-align: center;
+  /* font-size: large; */
+}
+/* label focus color */
+.input-field input[type="text"]:focus + label {
+  color:rgb(1, 58, 58);
+}
+/* label underline focus color */
+.input-field input[type="text"]:focus {
+  color:#000;
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+}
+/* valid color */
+.input-field input[type="text"].valid {
+  color:#000;
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+}
+/* invalid color */
+.input-field input[type="text"].invalid {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+  color: #000;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: #000;
+  /* text-align: center; */
+}
+
+.input.placeholder {
+  color: #000;
+}
+
+/* ****************  FONTS  **************** */
+/*  font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Cormorant Unicase', serif;
+    font-family: 'Lato', sans-serif; */

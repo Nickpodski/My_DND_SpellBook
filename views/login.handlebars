@@ -1,17 +1,37 @@
-<h2>Login</h2>
+<div class="cover">
+  <div id="userNameDiv">
+    <h1 id="userNameText">Spells</h1>
+  </div>
+</div>
 
-<form class="form login-form">
-  <div class="form-group">
-    <label for="email-login">email:</label>
-    <input class="form-input" type="text" id="email-login" />
-  </div>
-  <div class="form-group">
-    <label for="password-login">password:</label>
-    <input class="form-input" type="password" id="password-login" />
-  </div>
-  <div class="form-group">
-    <button class="btn btn-primary" type="submit">login</button>
-  </div>
-</form>
+<div class="backCover">
 
-<script src="/js/login.js"></script>
+</div>
+<div class="accountPage">
+<div class="loginPage">
+
+  <form class="form login-form">
+    <div class="form-group">
+      <label for="email-login">email:</label>
+      <input class="form-input" type="text" id="email-login" />
+    </div>
+    <div class="form-group">
+      <label for="password-login">password:</label>
+      <input class="form-input" type="password" id="password-login" />
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit">login</button>
+    </div>
+  </form>
+ </div> 
+</div>
+{{!-- Added the var to get rid of synchronous error --}}
+<script>
+  var url = "/js/login.js";
+  $.getScript(url);
+</script>
+<script>
+var url2 = "/js/turn.js";
+$.getScript(url2);
+</script>
+{{!-- </script> src="/js/turn.js"></script> --}}
