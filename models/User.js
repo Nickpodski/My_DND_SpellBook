@@ -35,6 +35,10 @@ User.init(
         len: [8],
       },
     },
+    spellbook: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   },
   {
     hooks: {

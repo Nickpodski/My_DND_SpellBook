@@ -24,7 +24,7 @@ router.get('/', withAuth, async (req, res) => {
 
 router.get('/all', withAuth, async (req, res) => {
   try {
-    const userData = await UserSpell.findAll({});
+    const userData = await Spell.findAll({});
 
     const users = userData.map((project) => project.get({ plain: true }));
     //DEBUG BELOW!
