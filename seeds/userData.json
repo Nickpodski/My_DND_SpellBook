@@ -2,7 +2,8 @@
   {
     "name": "Guillermo",
     "email": "guillermo@hotmail.com",
-    "password": "password12345"
+    "password": "password12345",
+    "spellbook": "215,1,3"
   },
   {
     "name": "Nick",
