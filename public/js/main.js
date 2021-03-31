@@ -1,6 +1,7 @@
  // Sample using dynamic pages with turn.js
-    backCover = document.getElementsByClassName('p2');
-    var numberOfPages = 3; 
+    // backCover = document.getElementsByClassName('p2');
+
+    var numberOfPages = 1000; 
 
 
     // Adds the pages that the book will need
@@ -62,22 +63,22 @@
 
     });
 
-    $(window).width(function(){
-  var win = $(this); //this = window
-  if (win.width() >= 820) { book.turn('display','double');}
-  else {
-    book.turn('display','single');
-  }
-});
-$(window).resize(function(){
-var win = $(this); //this = window
-if (win.width() >= 820) { book.turn('display','double');}
-else {
-  book.turn('display','single');
-}
-});
+//     $(window).width(function(){
+//   var win = $(this); //this = window
+//   if (win.width() >= 820) { book.turn('display','double');}
+//   else {
+//     book.turn('display','single');
+//   }
+// });
+// $(window).resize(function(){
+// var win = $(this); //this = window
+// if (win.width() >= 820) { book.turn('display','double');}
+// else {
+//   book.turn('display','single');
+// }
+// });
 
-    $('#book').click(function() {
-        $('body').css("backdrop-filter", "blur(8px)");
-    });
+    // $('#book').click(function() {
+    //     $('body').css("backdrop-filter", "blur(8px)");
+    // });
    
