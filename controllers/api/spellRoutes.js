@@ -69,9 +69,7 @@ router.put('/:id', async (req, res) => {
         },
       });
     } else {
-      const spellIDS = spellsSTR.split(',').map(Number);
-      const newSpell = spellIDS.join();
-      await User.update( {spellbook: newSpell},{
+      await User.update( {spellbook: spellID},{
         where: {
           id: req.params.id,
         },
