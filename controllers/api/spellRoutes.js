@@ -45,41 +45,43 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// router.put('/:id', async (req, res) => {
-//   try {
-//     const addSpell = await User.findOne({
-//       where: {
-//         id: req.params.id,
-//       },
-//     });
-//     const spellID = req.body.spellbook;
-//     if (!addSpell) {
-//       res.status(404).json({message: 'No user found with this id!'});
-//       return;
-//     }
-//     const spellsSTR = addSpell.spellbook;
-//     if (spellsSTR != null) {
-//       const spellIDS = spellsSTR.split(',').map(Number);
-//       spellIDS.push(parseInt(spellID));
-//       const newspellIDS = spellIDS.tostring();
-//       User.update( {spellbook: newspellIDS},{
-//         where: {
-//           id: req.params.id,
-//         }
-//       });
-//     } else {
-//       const newSpell = spellID.tostring();
-//       User.update( {spellbook: spellID},{
-//         where: {
-//           id: req.params.id,
-//         }
-//       });
-//     }
-//     res.status(200).json(addSpell);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+router.put('/:id', async (req, res) => {
+  try {
+    const addSpell = await User.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    const spellID = req.body.spellbook;
+    if (!addSpell) {
+      res.status(404).json({message: 'No user found with this id!'});
+      return;
+    }
+    const spellsSTR = addSpell.spellbook;
+    if (spellsSTR != null) {
+      const spellIDS = spellsSTR.split(',').map(Number);
+      spellIDS.push(parseInt(spellID));
+      console.log(spellIDS);
+      const newspellIDS = spellIDS.join();
+      await User.update( {spellbook: newspellIDS},{
+        where: {
+          id: req.params.id,
+        },
+      });
+    } else {
+      const spellIDS = spellsSTR.split(',').map(Number);
+      const newSpell = spellIDS.join();
+      await User.update( {spellbook: newSpell},{
+        where: {
+          id: req.params.id,
+        },
+      });
+    }
+    res.status(200).json(addSpell);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 // router.get('/:id/:spell', async (req, res) => {
 //   try {
