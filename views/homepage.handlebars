@@ -1,48 +1,16 @@
+<div class="cover">
+    <h1 id="userNameText">{{user.name}}s' Spells</h1>
+</div>
+<div class="accountPage">
+  <h2 id="bookBelongsTo">This spellbook belongs to</h2>
+</div>
 
-        <div class="cover">
-          <div id="userNameDiv">
-            <h1 id="userNameText">{{user.name}}s' Spells</h1>
-          </div>
-      </div>
-        <div class="backCover">
-            
-        </div>
-     
-        <div class="accountPage">
-            <div class="row allRows">
- 
-            <form class="col s12">
+<div class="newPage">
+Spells appear here
+</div>
 
-                <div class="row userNameRow">
-                  <div class="input-field col s12 nameInput">
-                    <input placeholder="Your Name Here" id="user_name" type="text" class="validate">
-                    <label for="user_name" id="belongsToQ">To Whom Does This Spell Book Belong?</label>
-                  </div>
-                </div>
-
-                <div class="row emailRow">
-                  <div class="input-field col s12">
-                    <input placeholder="Enscribe your email here" id="email" type="email" class="validate">
-                    <label for="email"></label>
-                  </div>
-                </div>
-
-                <div class="row passwordRow">
-                  <div class="input-field col s12">
-                    <input placeholder="A password to protect your spells" id="password" type="password" class="validate">
-                    <label for="password"></label>
-                  </div>
-                </div>
-
-                <button class="btn waves-effect waves-light" type="submit" name="action">
-                    <i class="lni lni-bookmark"></i>Create
-                  </button>
-
-              </form>
-                
-            </div>
-                   
-        </div>
-
-          <script type="text/javascript" src="/js/turn.js"></script>
-    {{!-- </div> --}}
+ <script>
+  var url = "/js/turn.js";
+  $.getScript(url);
+  </script>
+{{!--^ format fixes a syncronous issue --}}
