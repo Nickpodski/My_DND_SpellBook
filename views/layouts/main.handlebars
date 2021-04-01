@@ -34,12 +34,25 @@
     
       <h1>My DnD Spellbook</h1>
     
-    {{#if logged_in}}
-    
-      <button class="btn" id="logout">logout</button>
-    
-    {{/if}}
   </header>
+
+  <ul id="slide-out" class="sidenav">
+    <li><div class="user-view">
+      <li><div class="appName">My DnD Spellbook</div></li>
+      <li><div class="divider"></div></li>
+      {{!-- <a href="#name"><span class="white-text name">All Spells</span></a> --}}
+      {{!-- <a href="#email"><span class="white-text email">My Spellbook</span></a> --}}
+    </div></li>
+    <li class="navLinks"><a href="#!"><i class="material-icons">auto_stories</i>All Spells</a></li>
+    <li  class="navLinks"><a href="#!"><i class="material-icons">book</i>My Spellbook</a></li>
+    <li><div class="divider"></div></li>
+    <li><a class="subheader">The Coding Wizards 2021</a></li>
+    {{#if logged_in}}
+      {{!-- <button class="btn" id="allSpellsBtn">All Wizard Spells</button> --}}
+      <button class="btn" id="logout">logout</button>
+    {{/if}}
+  </ul>
+  <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons" id="menuIcon">menu</i></a>
   <main class="container container col">
     {{!-- each handlebars page --}}
     <div id="book">
@@ -50,7 +63,10 @@
   {{#if logged_in}}
   <script src="/js/logout.js"></script>
   {{/if}}
-
+  
+  {{!-- {{#if spells}}
+  <script src="/My_DND_SpellBook/public/js/main.js"></script>
+  {{/if}} --}}
   
   <script type="text/javascript" src="/js/turn.js"></script>
   <script type="text/javascript" src="/js/main.js"></script>
