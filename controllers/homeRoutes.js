@@ -9,7 +9,7 @@ router.get('/', withAuth, async (req, res) => {
     //DEBUG BELOW!
     // console.log(users)
     // console.log(userData);
-    // res.json(userData)
+
     const userData = await User.findOne({
       where: {
         id: req.session.user_id
@@ -48,6 +48,7 @@ router.get('/all', withAuth, async (req, res) => {
       res.render('spells', {
       users,
       logged_in: req.session.logged_in,
+
     });
   } catch (err) {
     res.status(500).json(err);

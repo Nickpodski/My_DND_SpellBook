@@ -1,8 +1,5 @@
- // Sample using dynamic pages with turn.js
-    // backCover = document.getElementsByClassName('p2');
-
-    var numberOfPages = 1000; 
-
+var numberOfPages = 1000; 
+// Will this effect number of pages for spellbook?
 
     // Adds the pages that the book will need
     function addPage(page, book) {
