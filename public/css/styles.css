@@ -134,7 +134,7 @@ h1 {
 }
 
 /******************** CREATE ACCOUNT PAGE (page 4) ****************** */
-.turn-page.p4 {
+.turn-page {
   background-image: url("https://cdn.pixabay.com/photo/2017/01/29/17/13/background-image-2018761_960_720.jpg");
   background-position: -55px 70px;
 }
@@ -237,6 +237,70 @@ font-weight: bold;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+
+/* **********     Spells Pages     ********** */
+/* .spellPage {
+background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-1033117_960_720.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+
+
+/* All Spells Page */
+
+.all-spells {
+  font-family: "Cormorant Unicase", serif;
+  background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-1033117_960_720.jpg");
+  background-position: -55px 70px;
+}
+.allspells-h4 {
+  font-size: 35px;
+  line-height: 110%;
+  margin: 18px 0px 30px;
+  padding: 0px 28px;
+  text-align: center;
+  font-weight: bold;
+}
+.desc-title {
+  font-size: 25px;
+  line-height: 110%;
+  margin: 10px 0px 10px;
+  padding: 0px 10px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.desc-spells {
+  font-family: "Cormorant Unicase", serif;
+  background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-1033117_960_720.jpg");
+  background-position: -55px 70px;
+}
+
+
+.info-container{
+  width: 50%;
+  float: left;
+}
+
+
+.info-title{
+  font-size: 18px;
+  line-height: 110%;
+  margin: 10px 0px 10px;
+  padding: 0px 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.info-value{
+  font-size: 18px;
+  line-height: 110%;
+  margin: 10px 0px 10px;
+  padding: 0px 10px;
+  text-align: center;
+}
+
 /* **********    Media Queries, to be more responsive    ********** */
 @media only screen and (max-width: 1050px) {
   #book {

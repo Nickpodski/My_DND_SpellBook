@@ -1,9 +1,92 @@
-    {{#each spells as |spell|}} 
+{{!-- {{#each spells as |spell|}} --}}
+{{!-- ? ^ & ^ --}}
+{{!-- user becomes an object (.this) --}}
+{{!-- <div id="book"> --}}
+    <div class="title-spells p1">
+        <h1 id="allspells-h4">Turn to see all spells!</h1>
+    </div>
 
-        <div class="cover">
-        <h4>{{spell.name}}</h4>
 
-        <p>{{spell.desc}}</p>
-                   
+    <div class="all-spells p2">
+        <h4 class="allspells-h4">{{name}}</h4>
+        {{!-- <h4>{{user.name}}</h4> --}}
+        <h5 class="desc-title">Description Title</h5>
+        {{!-- <p>{{user.desc}}</p> --}}
+        <p id="desc-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vestibulum massa ultricies
+            pellentesque gravida. Duis eget metus eget orci lobortis venenatis quis vel velit. Proin mauris turpis,
+            mollis sit amet vestibulum id, pellentesque eget nulla. Sed quis metus sit amet augue imperdiet vulputate.
+            Vivamus ut eros vel libero dapibus pharetra. Praesent finibus sem a porta placerat. Pellentesque habitant
+            morbi tristique senectus et netus et malesuada fames ac turpis egestas. Interdum et malesuada fames ac ante
+            ipsum primis in faucibus. Duis a laoreet nibh. Praesent vitae nulla nec neque vulputate cursus vitae et
+            sapien. Donec elementum neque nec libero finibus elementum.</p>
+
+    </div>
+
+
+    <div class="desc-spells p3">
+        <h4 class="allspells-h4"></h4>
+
+        <div class="info-container">
+            <p class="info-title">Range</p>
+            <p class="info-value">ITEM VALUE</p>
         </div>
+
+        <div class="info-container">
+            <p class="info-title">Components</p>
+            <p class="info-value">ITEM VALUE</p>
+        </div>
+        <div class="info-container">
+            <p class="info-title">Ritual</p>
+            <p class="info-value">ITEM VALUE</p>
+        </div>
+
+        <div class="info-container">
+            <p class="info-title">Concentration</p>
+            <p class="info-value">ITEM VALUE</p>
+        </div>
+        <div class="info-container">
+            <p class="info-title">Casting Time</p>
+            <p class="info-value">ITEM VALUE</p>
+        </div>
+
+        <div class="info-container">
+            <p class="info-title">Level</p>
+            <p class="info-value">ITEM VALUE</p>
+        </div>
+        <div class="info-container">
+            <p class="info-title">School</p>
+            <p class="info-value">ITEM VALUE</p>
+        </div>
+
+        <div class="info-container">
+            <p class="info-title">Duration</p>
+            <p class="info-value">ITEM VALUE</p>
+        </div>
+        <div class="info-container">
+            <p class="info-title">Material</p>
+            <p class="info-value">ITEM VALUE</p>
+        </div>
+
+        <div class="info-container">
+            <p class="info-title">Archetype</p>
+            <p class="info-value">ITEM VALUE</p>
+        </div>
+    </div>
+
+     <div class="desc-spells p4">
+        <h4 class="allspells-h4">Spell Title</h4>
+        <h5 class="desc-title">Description Title</h5>
+        <p id="desc-info">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vestibulum massa ultricies
+            pellentesque gravida. Duis eget metus eget orci lobortis venenatis quis vel velit. Proin mauris turpis,
+            mollis sit amet vestibulum id, pellentesque eget nulla. Sed quis metus sit amet augue imperdiet vulputate.
+            Vivamus ut eros vel libero dapibus pharetra. Praesent finibus sem a porta placerat. Pellentesque habitant
+            morbi tristique senectus et netus et malesuada fames ac turpis egestas. Interdum et malesuada fames ac ante
+            ipsum primis in faucibus. Duis a laoreet nibh. Praesent vitae nulla nec neque vulputate cursus vitae et
+            sapien. Donec elementum neque nec libero finibus elementum.</p>
+    </div>
+
+
+    {{!--</div> --}}
+
+
 <script type="text/javascript" src="/js/turn.js"></script>
