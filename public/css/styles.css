@@ -237,6 +237,13 @@ font-weight: bold;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+/* **********     Spells Pages     ********** */
+.spellPage {
+background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-1033117_960_720.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 /* **********    Media Queries, to be more responsive    ********** */
 @media only screen and (max-width: 1050px) {
   #book {

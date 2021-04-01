@@ -10,13 +10,13 @@ router.get('/', withAuth, async (req, res) => {
     // console.log(users)
     // console.log(userData);
     
-      res.json(userData);
+      // res.json(userData);
 
   //  BELOW IS WHAT WE WANT TO RENDER!!!!
-    // res.render('homepage', {
+    res.render('homepage', {
     //   // users.spells,
-    //   logged_in: req.session.logged_in,
-    // });
+      logged_in: req.session.logged_in,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -33,8 +33,9 @@ router.get('/all', withAuth, async (req, res) => {
     // res.json(userData)
 
       res.render('homepage', {
-      users,
+      // users,
       logged_in: req.session.logged_in,
+
     });
   } catch (err) {
     res.status(500).json(err);

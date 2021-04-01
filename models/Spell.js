@@ -95,7 +95,7 @@ Spell.init(
           newspellData.material = null;
         }
         if (!this.domains) {
-          newspellData.materials = null;
+          newspellData.domains = null;
         }
         if (!this.archetype) {
           newspellData.archetype = null;

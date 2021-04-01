@@ -1,16 +1,26 @@
+{{!-- USER'S SPELLBOOK --}}
 <div class="cover">
-    <h1 id="userNameText">{{user.name}}s' Spells</h1>
-</div>
-<div class="accountPage">
-  <h2 id="bookBelongsTo">This spellbook belongs to</h2>
+  <h1 id="userNameText">{{user.name}}s' Spells</h1>
 </div>
 
-<div class="newPage">
-Spells appear here
+<div class="spellPage1">
+<h2 id="spellName">{{spell.name}}</h2>
+<div class="spellInfo">
+{{#each user.spell as |spell|}}
+{{> spell-details}}
+{{/each}}
+  </div>
 </div>
 
- <script>
+<div class="spellPage2">
+  <p id="spellDesc">{{{spell.desc}}}</p>
+  <br>
+  <p>{{{spell.higher_level}}}</p>
+</div>
+
+<script>
   var url = "/js/turn.js";
   $.getScript(url);
-  </script>
+
+</script>
 {{!--^ format fixes a syncronous issue --}}
