@@ -59,6 +59,7 @@ var numberOfPages = 1000;
                 //                     ^ add .turn('next') -- to turn 2 pages
 
     });
+    
 
 //     $(window).width(function(){
 //   var win = $(this); //this = window

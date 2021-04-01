@@ -60,56 +60,56 @@ Spell.init(
       allowNull: false,
     },
     material: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     domains: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     archetype: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     circles: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     oaths: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     higher_level: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     patrons: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
     },
   },
   {
     hooks: {
       async beforeCreate(newspellData) {
-        if (!this.material) {
+        if (this.material != undefined) {
           newspellData.material = null;
         }
-        if (!this.domains) {
+        if (this.domains != undefined) {
           newspellData.domains = null;
         }
-        if (!this.archetype) {
+        if (this.archetype != undefined) {
           newspellData.archetype = null;
         }
-        if (!this.circles) {
+        if (this.circles != undefined) {
           newspellData.circles = null;
         }
-        if (!this.oaths) {
+        if (this.oaths != undefined) {
           newspellData.oaths = null;
         }
-        if (!this.higher_level) {
+        if (this.higher_level != undefined) {
           newspellData.higher_level = null;
         }
-        if (!this.patrons) {
+        if (this.patrons != undefined) {
           newspellData.patrons = null;
         }
       },

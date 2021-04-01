@@ -1,136 +1,126 @@
 const router = require('express').Router();
-const { UserSpell, User, Spell } = require('../../models');
+const { User, Spell } = require('../../models');
+const { sequelize } = require('../../models/User');
+const { QueryTypes } = require('sequelize');
 const withAuth = require('../../utils/auth');
 
-// router.post('/', withAuth, async (req, res) => {
-router.post('/', async (req, res) => {
-  try {
-    const newUserSpell = await UserSpell.create({
-      ...req.body,
-      // user_id: req.session.user_id,
-    });
-    res.status(200).json(newUserSpell);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
 
-router.get('/:id', async (req, res) => {
+// find spell by name
+router.get('/:name', async (req, res) => {
   try {
-    const getSpells = await User.findOne({
+    const getSpell = await Spell.findOne({
       where: {
-        id: req.params.id,
+        name: req.params.name,
         // user_id: req.session.user_id,
       },
     });
-    if (!getSpells) {
-      res.status(404).json({ message: 'No user found with this id!' });
+    if (!getSpell) {
+      res.status(404).json({ message: 'No spell found with this name!' });
       return;
     }
-    const spellsSTR = getSpells.spellbook;
-    if (!spellsSTR) {
-      res.status(404).json({ message: 'No spellbook found with this id!' });
-      return;
-    }
-    const spellIDS = spellsSTR.split(',').map(Number);
-    const findSpells = await Spell.findAll({
-      where: {
-        id: spellIDS,
-      }
-    })
-    const updatedUser = await User.findOne({
-      where: {
-        id: req.params.id,
-      },
-    });
-    res.status(200).json(updatedUser);
+    res.status(200).json(getSpell);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.put('/:id/add', async (req, res) => {
+// get all class spells currently. Currently let's limit to wizard.
+// localhost:3001/api/spells/all/wizard
+router.get('/all/:spellClass', async (req, res) => {
   try {
-    const addSpell = await User.findOne({
-      where: {
-        id: req.params.id,
-      },
+    const {spellClass} = req.params;
+    const allClassSpells = await sequelize.query(
+      'SELECT * FROM spellbook_db.spell WHERE class LIKE :search_class', {
+        replacements: { search_class: `%${spellClass}%`},
+        type: QueryTypes.SELECT
     });
-    const spellID = req.body.spellbook;
-    if (!addSpell) {
-      res.status(404).json({ message: 'No user found with this id!' });
+    // Future figure out how to add an error for incorrect class search.
+    if (allClassSpells.length === 0) {
+      res.status(404).json({ message: 'No spells found with this class!' });
       return;
-    }
-    const spellsSTR = addSpell.spellbook;
-    if (spellsSTR != null) {
-      if (spellsSTR.includes(parseInt(spellID))) {
-       res.status(409).json({ message: 'Spellbook already includes this spell for this user!'})
-       return;
-      } else {
-        const spellIDS = spellsSTR.split(',').map(Number);
-        spellIDS.push(parseInt(spellID));
-        const newspellIDS = spellIDS.join();
-        await User.update({ spellbook: newspellIDS }, {
-          where: {
-            id: req.params.id,
-          },
-        });
-      }
-    } else {
-      await User.update({ spellbook: spellID }, {
-        where: {
-          id: req.params.id,
-        },
-      });
-    }
-    const updatedUser = await User.findOne({
-      where: {
-        id: req.params.id,
-      },
-    });
-    res.status(200).json(updatedUser);
+    };
+    res.status(200).json(allClassSpells);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.put('/:id/remove', async (req, res) => {
+// get all spells based on spelllevel. 
+// localhost:3001/api/spells/spelllevel/cantrip
+router.get('/spelllevel/:level', async (req, res) => {
   try {
-    const deleteSpell = await User.findOne({
-      where: {
-        id: req.params.id,
-      },
+    const {level} = req.params;
+    const allClassSpells = await sequelize.query(
+      'SELECT * FROM spellbook_db.spell WHERE level LIKE :search_level', {
+        replacements: { search_level: `${level}`},
+        type: QueryTypes.SELECT
     });
-    if (!deleteSpell) {
-      res.status(404).json({ message: 'No user found with this id!' });
+    if (allClassSpells.length === 0) {
+      res.status(404).json({ message: 'No spells found with this class!' });
       return;
-    }
-    const spellsSTR = deleteSpell.spellbook;
-    if (spellsSTR == null) {
-      res.status(404).json({ message: 'No spellbook found with this user id!' })
-      return;
-    }
-    const spellID = req.body.spellbook;
-    const spellIDS = spellsSTR.split(',').map(Number);
-    const index = spellIDS.indexOf(parseInt(spellID));
-    if (index > -1) {
-      spellIDS.splice(index, 1);
-    } else {
-      res.status(404).json({ message: `This spell doesn't exist in this user's spellbook!` });
-      return;
-    }
-    const newSpellIDS = spellIDS.join();
-    await User.update({ spellbook: newSpellIDS }, {
-      where: {
-        id: req.params.id,
-      },
+    };
+    res.status(200).json(allClassSpells);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// get all spells based on casting time.
+// localhost:3001/api/spells/castingtime/1_action
+router.get('/castingtime/:action', async (req, res) => {
+  try {
+    const {action} = req.params;
+    const actionSTR = action.replace(/_/g, ' ');
+    const allSpellCastingTime = await sequelize.query(
+      'SELECT * FROM spellbook_db.spell WHERE casting_time LIKE :search_castingtime', {
+        replacements: { search_castingtime: `${actionSTR}`},
+        type: QueryTypes.SELECT
     });
-    const updatedUser = await User.findOne({
-      where: {
-        id: req.params.id,
-      },
+    if (allSpellCastingTime.length === 0) {
+      res.status(404).json({ message: 'No spells found with this casting time!' });
+      return;
+    };
+    res.status(200).json(allSpellCastingTime);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// get all spells based on if its a concentration or not.
+// localhost:3001/api/spells/concentration/yes
+router.get('/concentration/:search', async (req, res) => {
+  try {
+    const {search} = req.params;
+    const isConcentration = await sequelize.query(
+      'SELECT * FROM spellbook_db.spell WHERE concentration LIKE :search_concentration', {
+        replacements: { search_concentration: `${search}`},
+        type: QueryTypes.SELECT
     });
-    res.status(200).json(updatedUser);
+    if (isConcentration.length === 0) {
+      res.status(404).json({ message: 'This search only accepts yes or no!' });
+      return;
+    };
+    res.status(200).json(isConcentration);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// get all spells based on if its a ritual or not.
+// localhost:3001/api/spells/ritual/yes
+router.get('/ritual/:search', async (req, res) => {
+  try {
+    const {search} = req.params;
+    const isRitual = await sequelize.query(
+      'SELECT * FROM spellbook_db.spell WHERE ritual LIKE :search_ritual', {
+        replacements: { search_ritual: `${search}`},
+        type: QueryTypes.SELECT
+    });
+    if (isRitual.length === 0) {
+      res.status(404).json({ message: 'This search only accepts yes or no!' });
+      return;
+    };
+    res.status(200).json(isRitual);
   } catch (err) {
     res.status(500).json(err);
   }

@@ -4,17 +4,21 @@ const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, async (req, res) => {
   try {
-    console.log(req.session.user_id)
-    const userData = await User.findOne({ where: { id: req.session.user_id }, include: Spell });
+    // const userData = await Spell.findAll({});
+    // const users = userData.map((project) => project.get({ plain: true }));
     //DEBUG BELOW!
     // console.log(users)
     // console.log(userData);
-    
-      // res.json(userData);
 
-  //  BELOW IS WHAT WE WANT TO RENDER!!!!
+    const userData = await User.findOne({
+      where: {
+        id: req.session.user_id
+      }
+    });
+    const user = userData.get({ plain: true });
+    console.log(user);
     res.render('homepage', {
-    //   // users.spells,
+      ...user,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -22,18 +26,27 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
+// router.get('/', withAuth, async (req, res) => {
+      // res.json(userData);
+  //  BELOW IS WHAT WE WANT TO RENDER!!!!
+//    res.render('homepage', {
+      // users.spells,
+//      logged_in: req.session.logged_in,
+//    });
+//  } catch (err) {
+//    res.status(500).json(err);
+// });
+
 router.get('/all', withAuth, async (req, res) => {
   try {
-    const userData = await Spell.findAll({});
-
-    const users = userData.map((project) => project.get({ plain: true }));
+    // const userData = await Spell.findAll({});
+    // const users = userData.map((project) => project.get({ plain: true }));
     //DEBUG BELOW!
     // console.log(users)
     // console.log(userData);
     // res.json(userData)
-
-      res.render('homepage', {
-      // users,
+      res.render('spells', {
+      users,
       logged_in: req.session.logged_in,
 
     });
@@ -47,7 +60,6 @@ router.get('/login', (req, res) => {
     res.redirect('/');
     return;
   }
-
   res.render('login');
 });
 
