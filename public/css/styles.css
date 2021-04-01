@@ -4,25 +4,61 @@ body {
   background-size: cover;
   padding: 12px 1px;
   /* ^ to get blur to cover more of bg w/o harsh line */
-  display: inline-table;
+  /* /* display: inline-table; */
+  overflow: hidden;
 }
 
 /* **********     Page header     **********  */
 h1 {
   font-family: "Cinzel", serif;
   font-size: 4.2rem;
-  line-height: 110%;
-  display: inline-flex;
+  line-height: 0;
+  /* display: inline-flex; */
   color: red;
-  position: absolute;
-  margin: 6px 22px;
+  /* position: absolute; */
+  margin: 58px 0px 0px 160px;
+}
+
+/*  ********** Side nav ****************** */
+/* a.sidenav-trigger {
+  margin: 40px 0px 0px 60px;
+  display: block;
+} */
+#menuIcon {
+  font-size: 45px;
+  color: red;
+}
+
+.sidenav {
+  background-image: url("https://cdn.pixabay.com/photo/2014/10/04/15/29/paper-473630__340.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+  text-align: center;
+}
+
+.appName {
+  font-family: "Cinzel", serif;
+  color: red;
+  font-size: 40px;
+  margin: 60px 0px 14px 0px;
+}
+
+.sidenav li>a {
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  font-size: 23px;
 }
 
 /* **********     BOOK    ********** */
+/* main.container.col {
+  margin: 165px 0px 0px 0px;
+} */
+
 #book {
   width: 800px;
   height: 500px;
-  margin: 16% 22%;
+  /* margin: 12% 12%; */
 }
 
 /* empty pages */
@@ -43,7 +79,7 @@ h1 {
   text-align: center;
   font-size: 42px;
   line-height: 500px;
-  margin: -128px 0px 0px 70px;
+  margin: -125px 0px 0px 15px;
 }
 
 
@@ -90,10 +126,10 @@ h1 {
 #turnPageH2 {
   font-family: "Cormorant Unicase", serif;
   font-size: 35px;
-  line-height: 110%;
-  margin: 165px 72px 16px 72px;
+  padding: 118px 72px 16px 72px;
   text-align: center;
   font-weight: bold;
+  
 }
 .right-arrow {
   margin: 0px 184px;
@@ -138,6 +174,7 @@ h1 {
   font-family: "Cormorant Unicase", serif;
   background-image: url("https://cdn.pixabay.com/photo/2017/01/29/17/13/background-image-2018761_960_720.jpg");
   background-position: -55px 70px;
+  overflow: hidden;
 }
 
 /* Centering "This book belongs to?" */
@@ -176,21 +213,39 @@ font-weight: bold;
 #createAccountBtn:hover {
   background-color: maroon;
 }
-
-/* Logout button */
-#logout {
+.row {
+   width: 100%;
+}
+#allSpellsBtn {
   text-align: center;
   display: inline;
-  padding: 0.5rem 1.2rem;
-  margin: 0px 0px 0px 965px;
+  margin: 18px 0px 0px 695px;
   text-decoration: none;
   font-size: 1rem;
   border-radius: 0.3rem;
   border: 1px solid transparent;
   outline: none;
   color: #1a1a1a;
-  background-color: #aeaeae;
+  background-color: red;
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  position: static;
+}
+
+
+/* Logout button */
+#logout {
+  text-align: center;
+  display: inline;
+  margin: -60px 0px 0px 890px;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 0.3rem;
+  border: 1px solid transparent;
+  outline: none;
+  color: #1a1a1a;
+  background-color: red;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  position: relative;
 }
 
 /* **********   Login Form     ********** */

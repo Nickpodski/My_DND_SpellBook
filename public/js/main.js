@@ -1,6 +1,10 @@
 var numberOfPages = 1000; 
-// Will this effect number of pages for spellbook?
 
+//  Side nav
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+//   $('.sidenav').sidenav('side', left);
     // Adds the pages that the book will need
     function addPage(page, book) {
         // 	First check if the page is already in the book
