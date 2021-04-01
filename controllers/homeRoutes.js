@@ -17,10 +17,25 @@ router.get('/', withAuth, async (req, res) => {
       }
     });
     const user = userData.get({ plain: true });
-    res.render('homepage', {
-      ...user,
-      logged_in: req.session.logged_in,
-    });
+
+    const spellBookIds = user.spellbook.split(',');
+
+    Spell.findAll({
+      where: {id: spellBookIds},
+      raw: true
+    })
+    .then((userSpells) => {
+      user.spells = userSpells;
+
+      console.log(user.spells)
+      
+      res.render('homepage', {
+        ...user,
+        logged_in: req.session.logged_in,
+      });
+    })
+
+    
   } catch (err) {
     res.status(500).json(err);
   }
@@ -48,12 +63,21 @@ router.get('/all', withAuth, async (req, res) => {
     const allClassSpells = await sequelize.query(
       'SELECT * FROM spellbook_db.spell WHERE class LIKE :search_class', {
         replacements: { search_class: `%wizard%`},
-        type: QueryTypes.SELECT
+        type: QueryTypes.SELECT,
+        raw: true,
     });
-    const spell = allClassSpells[0];
-    // const spells = allClassSpells.get({ plain: true });
+    // const spell = allClassSpells[0];
+    const spells = allClassSpells;
+    console.log("Here is the console" + spells);
+    const updatedSpells = spells.map((spell)=>{
+      spell.desc = spell.desc.replace(new RegExp('<p>', 'g'),"");
+      spell.desc = spell.desc.replace(new RegExp('</p>', 'g'),"");
+      spell.higher_level = spell.desc.replace(new RegExp('<p>', 'g'),"");
+      spell.higher_level = spell.desc.replace(new RegExp('</p>', 'g'),"");
+      return spell;
+    })
     res.render('spells', {
-    ...spell,
+    updatedSpells,
     logged_in: req.session.logged_in,
     });
   } catch (err) {

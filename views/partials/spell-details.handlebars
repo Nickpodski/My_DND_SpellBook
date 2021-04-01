@@ -1,7 +1,6 @@
 
-  
 <ul>
-    <li>Level: {{spell.level}}</li>
+    <li>Level: {{level}}</li>
     <li>Range: {{spell.range}}</li>
     <li>Components: {{spell.components}}</li>
     <li>Material: {{spell.material}}</li>
@@ -16,11 +15,7 @@
 <div class="spellPage2">
   <p id="spellDesc">{{{spell.desc}}}</p>
   <br>
-  <p>{{{spell.higher_level}}}</p>
+  <p>{{spell.higher_level}}</p>
 </div>
 
-<script>
-  var url = "/js/turn.js";
-  $.getScript(url);
-</script>
 {{!--^ format fixes a syncronous issue --}}

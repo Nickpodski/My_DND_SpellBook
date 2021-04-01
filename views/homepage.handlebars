@@ -3,20 +3,24 @@
   <h1 id="userNameText">{{name}}s' Spells</h1>
 </div>
 
+
+{{!-- 
 <div class="spellPage1">
-<h2 id="spellName">{{spell.name}}</h2>
+<h2 id="spellName">{{spell.name}}</h2> --}}
+
+{{#each spells as |spell|}}
 <div class="spellInfo">
-{{#each user.spell as |spell|}}
-{{> spell-details}}
-{{/each}}
-  </div>
+{{> spell-details spell}}
+  {{!-- </div> --}}
 </div>
 
-<div class="spellPage2">
+{{/each}}
+
+{{!-- <div class="spellPage2">
   <p id="spellDesc">{{{spell.desc}}}</p>
   <br>
   <p>{{{spell.higher_level}}}</p>
-</div>
+</div> --}}
 
 <script>
   var url = "/js/turn.js";
