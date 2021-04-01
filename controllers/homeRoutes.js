@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { User, Spell, UserSpell } = require('../models');
+const { sequelize } = require('../models/User');
 const withAuth = require('../utils/auth');
+const { QueryTypes } = require('sequelize');
 
 router.get('/', withAuth, async (req, res) => {
   try {
@@ -9,14 +11,12 @@ router.get('/', withAuth, async (req, res) => {
     //DEBUG BELOW!
     // console.log(users)
     // console.log(userData);
-
     const userData = await User.findOne({
       where: {
         id: req.session.user_id
       }
     });
     const user = userData.get({ plain: true });
-    console.log(user);
     res.render('homepage', {
       ...user,
       logged_in: req.session.logged_in,
@@ -45,10 +45,16 @@ router.get('/all', withAuth, async (req, res) => {
     // console.log(users)
     // console.log(userData);
     // res.json(userData)
-      res.render('spells', {
-      users,
-      logged_in: req.session.logged_in,
-
+    const allClassSpells = await sequelize.query(
+      'SELECT * FROM spellbook_db.spell WHERE class LIKE :search_class', {
+        replacements: { search_class: `%wizard%`},
+        type: QueryTypes.SELECT
+    });
+    const spell = allClassSpells[0];
+    // const spells = allClassSpells.get({ plain: true });
+    res.render('spells', {
+    ...spell,
+    logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
