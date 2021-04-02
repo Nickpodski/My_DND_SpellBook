@@ -6,68 +6,91 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My DnD Spellbook</title>
   {{!-- Book icon by title --}}
-  <link rel="shortcut icon" type="image/jpg" href="/assets/favicon (2).ico"/>
-  {{!-- JQuery CDN  --}}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" 
-        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
-    <!-- Javascript CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js" 
-        integrity="sha512-oHBLR38hkpOtf4dW75gdfO7VhEKg2fsitvHZYHZjObc4BPKou2PGenyxA5ZJ8CCqWytBx5wpiSqwVEBy84b7tw==" crossorigin="anonymous"></script>
-    <!--Materialize -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Materialize Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,600&family=Cormorant+Unicase:wght@400;500;600;700&family=Lato&display=swap" rel="stylesheet">
-    <!-- Line Icons -->
-    <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
-  {{!-- <link rel="stylesheet" href="/css/jass.css"> --}}
+  <link rel="shortcut icon" type="image/jpg" href="/assets/favicon (2).ico" />
+  {{!-- JQuery CDN --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous"></script>
+  <!-- Javascript CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js"
+    integrity="sha512-oHBLR38hkpOtf4dW75gdfO7VhEKg2fsitvHZYHZjObc4BPKou2PGenyxA5ZJ8CCqWytBx5wpiSqwVEBy84b7tw=="
+    crossorigin="anonymous"></script>
+  <!--Materialize -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Materialize Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,600&family=Cormorant+Unicase:wght@400;500;600;700&family=Lato&display=swap"
+    rel="stylesheet">
+  <!-- Line Icons -->
+  <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
+  {{!--
+  <link rel="stylesheet" href="/css/jass.css"> --}}
   <link rel="stylesheet" href="/css/styles.css">
- 
+
 </head>
 
 <body>
   <header class="display-flex justify-space-between align-center p-2">
-    
-      <h1>My DnD Spellbook</h1>
-    
+
+    <h1 id="siteName">My DnD Spellbook</h1>
+
   </header>
 
   <ul id="slide-out" class="sidenav">
-    <li><div class="user-view">
-      <li><div class="appName">My DnD Spellbook</div></li>
-      <li><div class="divider"></div></li>
-      {{!-- <a href="#name"><span class="white-text name">All Spells</span></a> --}}
-      {{!-- <a href="#email"><span class="white-text email">My Spellbook</span></a> --}}
-    </div></li>
+    <li>
+      <div class="user-view">
+    <li>
+      <div class="appName">My DnD Spellbook</div>
+    </li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    {{!-- <a href="#name"><span class="white-text name">All Spells</span></a> --}}
+    {{!-- <a href="#email"><span class="white-text email">My Spellbook</span></a> --}}
+    </div>
+    </li>
     <li class="navLinks"><a href="#!"><i class="material-icons">auto_stories</i>All Spells</a></li>
-    <li  class="navLinks"><a href="#!"><i class="material-icons">book</i>My Spellbook</a></li>
-    <li><div class="divider"></div></li>
-    <li><a class="subheader">The Coding Wizards 2021</a></li>
+    <li class="navLinks"><a href="#!"><i class="material-icons">book</i>My Spellbook</a></li>
+    
     {{#if logged_in}}
-      {{!-- <button class="btn" id="allSpellsBtn">All Wizard Spells</button> --}}
-      <button class="btn" id="logout">logout</button>
+    {{!-- <button class="btn" id="allSpellsBtn">All Wizard Spells</button> --}}
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li class="navLinks" id="logout"><a href="#!"><i class="material-icons">logout</i>Logout</a>
+    </li>
     {{/if}}
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li><a class="subheader">The Coding Wizards 2021</a></li>
   </ul>
   <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons" id="menuIcon">menu</i></a>
-  <main class="container container col">
-    {{!-- each handlebars page --}}
-    <div id="book">
-    {{{ body }}}
+
+  <div class="wrapper">
+    <div class="aspect">
+      <div class="aspect-inner">
+        {{!-- each handlebars page --}}
+        <div id="book">
+          {{{ body }}}
+        </div>
+      </div>
     </div>
-  </main>
-  
+  </div>
+
   {{#if logged_in}}
   <script src="/js/logout.js"></script>
   {{/if}}
-  
+
   {{!-- {{#if spells}}
   <script src="/My_DND_SpellBook/public/js/main.js"></script>
   {{/if}} --}}
-  
+
   <script type="text/javascript" src="/js/turn.js"></script>
   <script type="text/javascript" src="/js/main.js"></script>
 </body>

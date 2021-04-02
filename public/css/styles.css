@@ -2,28 +2,23 @@ body {
   background-image: url("https://cdn.pixabay.com/photo/2018/03/29/13/15/candle-3272201_960_720.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 12px 1px;
+  /* padding: 12px 1px; */
   /* ^ to get blur to cover more of bg w/o harsh line */
-  /* /* display: inline-table; */
-  overflow: hidden;
+   /* display: inline-table;  */
+   overflow: hidden;
+  
 }
 
 /* **********     Page header     **********  */
-h1 {
+#siteName {
   font-family: "Cinzel", serif;
   font-size: 4.2rem;
   line-height: 0;
-  /* display: inline-flex; */
   color: red;
-  /* position: absolute; */
   margin: 58px 0px 0px 232px;
 }
 
 /*  ********** Side nav ****************** */
-/* a.sidenav-trigger {
-  margin: 40px 0px 0px 60px;
-  display: block;
-} */
 #menuIcon {
   font-size: 45px;
   color: red;
@@ -55,17 +50,68 @@ h1 {
   margin: 165px 0px 0px 0px;
 } */
 
-#book {
+/* #book {
   width: 800px;
   height: 500px;
   /* margin: 12% 12%; */
-}
+/* } 
 
 /* empty pages */
-#book .turn-page {
+/* #book .turn-page {
   background-color: white;
+} */
+/* html,
+body {
+  background-color: #efefef;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+} */
+
+.wrapper {
+  align-items: center;
+  display: flex;
+  height: 90%;
+  justify-content: center;
+  margin: 5%;
+  width: 90%;
 }
 
+.aspect {
+  padding-bottom: 70%;
+  position: relative;
+  width: 100%;
+}
+
+.aspect-inner {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#book {
+  height: 100%;
+  transition: margin-left 0.25s ease-out;
+  width: 100%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.page{
+  height: 100%;
+  width: 100%;
+}
+/* 
+#book .page img {
+  max-width: 100%;
+  height: 100%;
+} */
 /* Front Cover  */
 #book .cover {
   background-image: url("https://cdn.pixabay.com/photo/2018/07/16/16/55/background-image-3542403_960_720.jpg");
@@ -73,14 +119,14 @@ h1 {
   background-size: cover;
 }
 
-/* #book .cover h1 {
+#book .cover h1 {
   font-family: "Cinzel", serif;
   color: red;
   text-align: center;
   font-size: 42px;
   line-height: 500px;
   margin: -125px 0px 0px 15px;
-} */
+}
 
 
 /* **********      Back of front-cover     **********  */
@@ -89,8 +135,18 @@ h1 {
   background-position: center;
   background-size: cover;
 }
-/* .newPage {
-} */
+
+/* **********     Back Page & back of book     ********** */
+.backOfBookPage {
+  background-image: url('https://cdn.pixabay.com/photo/2018/09/04/10/30/paper-3653437__340.png');
+  background-position: center;
+  background-size: cover;
+}
+.backOfBook {
+  background-image: url('https://cdn.pixabay.com/photo/2016/04/15/21/37/paper-1332013__340.jpg');
+  background-position: center;
+  background-size: cover;
+}
 
 /* **********     Turn.js's CSS     ********** */
 #book .loader {
@@ -233,7 +289,7 @@ font-weight: bold;
 
 
 /* Logout button */
-#logout {
+/* #logout {
   text-align: center;
   display: inline;
   margin: -60px 0px 0px 890px;
@@ -246,7 +302,7 @@ font-weight: bold;
   background-color: red;
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
   position: relative;
-}
+} */
 
 /* **********   Login Form     ********** */
 /* label color */
@@ -282,7 +338,6 @@ font-weight: bold;
   color: #000;
   /* text-align: center; */
 }
-
 .input.placeholder {
   color: #000;
 }
@@ -301,7 +356,6 @@ background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-103
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 
 /* All Spells Page */
 #desc-info {
@@ -328,20 +382,15 @@ background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-103
   text-align: left;
   font-weight: bold;
 }
-
 .desc-spells {
   font-family: "Cormorant Unicase", serif;
   background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-1033117_960_720.jpg");
   background-repeat: no-repeat;
 }
-
-
 .info-container{
   width: 50%;
   float: left;
 }
-
-
 .info-title{
   font-size: 18px;
   line-height: 110%;
@@ -350,7 +399,6 @@ background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-103
   text-align: center;
   font-weight: bold;
 }
-
 .info-value{
   font-size: 18px;
   line-height: 110%;
@@ -360,7 +408,7 @@ background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-103
 }
 
 /* **********    Media Queries, to be more responsive    ********** */
-@media only screen and (max-width: 1050px) {
+/* @media only screen and (max-width: 1050px) {
   #book {
     margin-left: 45px;
   }
@@ -439,7 +487,7 @@ background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-103
   #book {
     margin-left: -300px;
   }
-}
+} */
 /* ****************  FONTS  **************** */
 /*  font-family: 'Cinzel', serif;
     font-family: 'Cormorant Garamond', serif;
