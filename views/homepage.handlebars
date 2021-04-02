@@ -7,19 +7,26 @@
 <div class="spellPage1 page">
 <h2 id="spellName">{{this.name}}</h2>
 {{> spell-stats}}
+ {{#if this.archetype}}
+    <p class="info-title">Archetype</p>
+    <p class="info-value">{{this.archetype}}</p>
+    {{/if}}
 </div>
 
 <div class="spellPage2 page">
 {{> spell-desc}}
 </div>
-{{/each}}
+
 {{#if this.higher_level}}
-     <div class="desc-spells p4">
+     <div class="desc-spells">
         <h4 class="allspells-h4">{{this.name}}</h4>
         <h5 class="desc-title">Higher Level</h5>
         <section id="desc-info">{{{this.higher_level}}}</section>
     </div>
   {{/if}}
+
+{{/each}}
+
 <div class="backOfBookPage page">
 
 </div>
