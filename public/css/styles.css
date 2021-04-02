@@ -16,7 +16,7 @@ h1 {
   /* display: inline-flex; */
   color: red;
   /* position: absolute; */
-  margin: 58px 0px 0px 160px;
+  margin: 58px 0px 0px 232px;
 }
 
 /*  ********** Side nav ****************** */
@@ -73,14 +73,14 @@ h1 {
   background-size: cover;
 }
 
-#book .cover h1 {
+/* #book .cover h1 {
   font-family: "Cinzel", serif;
   color: red;
   text-align: center;
   font-size: 42px;
   line-height: 500px;
   margin: -125px 0px 0px 15px;
-}
+} */
 
 
 /* **********      Back of front-cover     **********  */
@@ -295,28 +295,30 @@ font-weight: bold;
 }
 
 
-/* **********     Spells Pages     ********** */
-/* .spellPage {
+/* **********     User's Spells Pages     ********** */
+.spellPage1, .spellPage2 {
 background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-1033117_960_720.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-} */
+}
 
 
 /* All Spells Page */
-
+#desc-info {
+  padding: 0px 30px;
+}
 .all-spells {
   font-family: "Cormorant Unicase", serif;
   background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-1033117_960_720.jpg");
-  background-position: -55px 70px;
+  background-position: -75px -10px;
+  background-repeat: no-repeat;
 }
-.allspells-h4 {
-  font-size: 35px;
-  line-height: 110%;
-  margin: 18px 0px 30px;
-  padding: 0px 28px;
+#allspells-h4 {
+  font-size: 34px;
   text-align: center;
   font-weight: bold;
+  line-height: 50px;
+  margin: 77px 85px 0px 85px;
 }
 .desc-title {
   font-size: 25px;
@@ -330,7 +332,7 @@ background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-103
 .desc-spells {
   font-family: "Cormorant Unicase", serif;
   background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-1033117_960_720.jpg");
-  background-position: -55px 70px;
+  background-repeat: no-repeat;
 }
 
 
