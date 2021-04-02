@@ -402,12 +402,24 @@ font-weight: bold;
   background-repeat: no-repeat;
   overflow: hidden;
 }
+
 #allspells-h4 {
   font-size: 34px;
   text-align: center;
   font-weight: bold;
   line-height: 50px;
   margin: 77px 85px 0px 85px;
+}
+
+.add-btn{
+  margin-left: 10px;
+  border-radius: 10px;
+  border: 3px solid #000000;
+  background: none;
+  padding-bottom: 5px;
+  cursor: pointer;
+  width: 50px;
+  border-width: 2px;
 }
 .desc-title {
   font-size: 25px;
