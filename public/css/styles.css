@@ -1,13 +1,12 @@
-
+/* 
 body {
   background-image: url("https://cdn.pixabay.com/photo/2018/03/29/13/15/candle-3272201_960_720.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
-  /* padding: 12px 1px; */
-  /* ^ to get blur to cover more of bg w/o harsh line */
-   /* display: inline-table;  */
-   overflow: hidden;
-  
+  background-size: cover;  
+} */
+html { 
+  background-image: url("https://cdn.pixabay.com/photo/2018/03/29/13/15/candle-3272201_960_720.jpg");
+  background-size: 1400px;
 }
 
 /* **********     Page header     **********  */
@@ -47,27 +46,11 @@ body {
 }
 
 /* **********     BOOK    ********** */
-/* main.container.col {
-  margin: 165px 0px 0px 0px;
-} */
-
  #book {
   width: 800px;
   height: 500px;
-  /* margin: 12% 12%; */
+  margin: -6% 12%;
 } 
-
-/* empty pages */
-/* #book .turn-page {
-  background-color: white;
-} */
-/* html,
-body {
-  background-color: #efefef;
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-} */
 
 .wrapper {
   align-items: center;
@@ -92,27 +75,6 @@ body {
   top: 0;
 }
 
-/* #book {
-  height: 100%;
-  transition: margin-left 0.25s ease-out;
-  width: 100%;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-} */
-
-/* .page{
-  height: 100%;
-  width: 100%;
-} */
-/* 
-#book .page img {
-  max-width: 100%;
-  height: 100%;
-} */
 /* Front Cover  */
 #book .cover {
   background-image: url("https://cdn.pixabay.com/photo/2018/07/16/16/55/background-image-3542403_960_720.jpg");
@@ -120,8 +82,7 @@ body {
   background-size: cover;
   overflow: hidden;
 }
-
-#book .cover h1 {
+#loginCoverH1 {
   font-family: "Cinzel", serif;
   color: red;
   text-align: center;
@@ -354,6 +315,14 @@ font-weight: bold;
 
 
 /* **********     User's Spells Pages     ********** */
+#userNameText {
+  text-shadow: 1px 1px 9px darkolivegreen;
+  font-family: 'Cormorant Unicase';
+  color: brown;
+  text-align: center;
+  font-size: 42px;
+  padding: 34px 23px 0px 23px;
+}
 .spellPage1, .spellPage2 {
   background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-1033117_960_720.jpg");
   background-repeat: no-repeat;
@@ -362,7 +331,7 @@ font-weight: bold;
   overflow: hidden;
 }
 #spellName {
-  font-size: 33px;
+  font-size: 28px;
   /* text-align: center; */
   font-weight: bold;
   line-height: 50px;
@@ -377,40 +346,47 @@ font-weight: bold;
   color: black;
   padding-right: 5px;
 }
-#descTitle {
-  font-size: 19px;
-  font-weight: bold;
-  line-height: 30px;
-  padding: 0px -1px 0px 28px;
-  text-align: center;
-  text-decoration: underline;
-  text-underline-position: under;
-}
 #description {
   padding: 0px 24px 0px 24px;
   text-indent: 30px;
 }
-
+#descTitle {
+  padding: 26px 0px 5px 0px;
+  text-align: center;
+  font-size: 15px;
+  text-underline-position: under;
+  text-decoration-line: underline;
+  font-weight: bold;
+}
 /* All Spells Page */
 #desc-info {
   padding: 0px 30px;
+  text-indent: 10%;
+  font-family: 'Cinzel';
 }
 .all-spells {
-  font-family: "Cormorant Unicase", serif;
+  font-family: 'Cinzel';
   background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-1033117_960_720.jpg");
   background-position: -75px -10px;
   background-repeat: no-repeat;
   overflow: hidden;
 }
-
-#allspells-h4 {
+#allspells-h1 {
+  font-family: 'Cormorant Unicase', serif;
   font-size: 34px;
   text-align: center;
   font-weight: bold;
-  line-height: 50px;
-  margin: 77px 85px 0px 85px;
+  color: brown;
+  padding: 45px 35px 0px 35px;
+  text-shadow: 1px 1px 5px darkolivegreen;
 }
-
+.allspells-h4 {
+  font-size: 30px;
+  text-align: left;
+  font-weight: bold;
+  color: black;
+  padding: 0px 20px 0px 35px;
+}
 .add-btn{
   margin-left: 10px;
   border-radius: 10px;
@@ -422,11 +398,12 @@ font-weight: bold;
   border-width: 2px;
 }
 .desc-title {
-  font-size: 25px;
+  color: red;
+  font-size: 20px;
   line-height: 110%;
   margin: 10px 0px 10px;
   padding: 0px 10px;
-  text-align: left;
+  text-align: center;
   font-weight: bold;
 }
 .desc-spells {
@@ -447,12 +424,13 @@ font-weight: bold;
   text-align: center;
   font-weight: bold;
 }
-.info-value{
+.info-value {
   font-size: 18px;
   line-height: 110%;
-  margin: 10px 0px 10px;
+  margin: 0px 10px 10px 10px;
   padding: 0px 10px;
   text-align: center;
+  color: red;
 }
 
 /* **********    Media Queries, to be more responsive    ********** */

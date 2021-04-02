@@ -27,7 +27,7 @@ router.get('/', withAuth, async (req, res) => {
     .then((userSpells) => {
       user.spells = userSpells;
 
-      console.log(user.spells)
+      // console.log(user.spells)
       
       res.render('homepage', {
         ...user,

@@ -13,7 +13,13 @@
 {{> spell-desc}}
 </div>
 {{/each}}
-
+{{#if this.higher_level}}
+     <div class="desc-spells p4">
+        <h4 class="allspells-h4">{{this.name}}</h4>
+        <h5 class="desc-title">Higher Level</h5>
+        <section id="desc-info">{{{this.higher_level}}}</section>
+    </div>
+  {{/if}}
 <div class="backOfBookPage page">
 
 </div>
