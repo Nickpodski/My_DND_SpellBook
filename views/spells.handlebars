@@ -1,15 +1,15 @@
- <div class="cover p1 page">
-        <h1 id="allspells-h1">Turn to see all spells!</h1>
-    </div>
+<div class="cover p1 page">
+    <h1 id="allspells-h1">Turn to see all spells!</h1>
+</div>
 
-{{#each updatedSpells as |spell|}}
+{{#each spells}}
 
 {{!-- ? ^ & ^ --}}
 {{!-- user becomes an object (.this) --}}
 {{!-- <div id="book"> --}}
 
 
-   
+
     <div class="desc-spells p3 page">
         <h4 class="allspells-h4">{{this.name}}</h4>
 
@@ -53,35 +53,27 @@
             <p class="info-title">Material</p>
             <p class="info-value">{{this.material}}</p>
         </div>
-        {{#if this.archetype}}
-        <div class="info-container">
-            <p class="info-title">Archetype</p>
-            <p class="info-value">{{this.archetype}}</p>
+
+        {{#if this.higher_level}}
+        <div class="desc-spells p4">
+            <h4 class="allspells-h4">{{this.name}}</h4>
+            <h5 class="desc-title">Higher Level</h5>
+            <section id="desc-info">{{{this.higher_level}}}</section>
         </div>
         {{/if}}
-    </div>
-    {{#if this.higher_level}}
-     <div class="desc-spells p4">
-        <h4 class="allspells-h4">{{this.name}}</h4>
-        <h5 class="desc-title">Higher Level</h5>
-        <section id="desc-info">{{{this.higher_level}}}</section>
-    </div>
-    {{/if}}
- <div class="all-spells p2 page">
-        <div class = "allspells-div">
-        {{!Added buton}}
-        <h4 class="allspells-h4">{{this.name}}<button class = "add-btn">+</button></h4>
+
+        <div class="all-spells p2 page">
+            <div class="allspells-div">
+                {{!Added buton}}
+                <h4 class="allspells-h4">{{this.name}}<button class="add-btn">+</button></h4>
+            </div>
+            {{!-- <h4>{{user.name}}</h4> --}}
+            <h5 class="desc-title"></h5>
+            {{!-- <p>{{user.desc}}</p> --}}
+            <p id="desc-info">{{{this.desc}}}</p>
+
         </div>
-        {{!-- <h4>{{user.name}}</h4> --}}
-        <h5 class="desc-title"></h5>
-        {{!-- <p>{{user.desc}}</p> --}}
-        <p id="desc-info">{{{this.desc}}}</p>
+        {{/each}};
 
-    </div>
-{{/each}};
-
-    {{!--</div> --}}
-
-
-
-
+        {{!--
+    </div> --}}

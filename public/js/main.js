@@ -1,4 +1,22 @@
-var numberOfPages = 1000; 
+var numberOfPages = 1000;
+const addSpellBtn = $('.add-btn');
+
+// addSpellBtn.on("click", addSpellButton());
+
+function addSpellButton(spell) {
+    const spellID = JSON.stringify(spell);
+    const url = '/api/spellbooks/add/' + spellID;
+    axios.put(url,)
+      .then(function (res) {
+        console.log(res);
+        return;
+      })
+      .catch(function (err) {
+          console.log(err);
+          return;
+      });
+    return;
+  }
 
 //  Side nav
 $(document).ready(function(){
@@ -65,6 +83,7 @@ $(document).ready(function(){
     });
     
 });
+
 //     $(window).width(function(){
 //   var win = $(this); //this = window
 //   if (win.width() >= 820) { book.turn('display','double');}

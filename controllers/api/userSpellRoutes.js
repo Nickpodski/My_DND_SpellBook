@@ -15,12 +15,12 @@ const withAuth = require('../../utils/auth');
 //   }
 // });
 
-router.get('/:id', async (req, res) => {
+router.get('/get', async (req, res) => {
   try {
     const getSpells = await User.findOne({
       where: {
-        id: req.params.id,
-        // user_id: req.session.user_id,
+        // id: req.params.id,
+        id: req.session.user_id,
       },
     });
     if (!getSpells) {
@@ -44,14 +44,15 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.put('/:id/add', async (req, res) => {
+router.put('/add/:spellID',  async (req, res) => {
   try {
     const addSpell = await User.findOne({
       where: {
-        id: req.params.id,
+        // id: req.params.id,
+        id: req.session.user_id,
       },
     });
-    const spellID = req.body.spellbook;
+    const spellID = req.params.spellID;
     if (!addSpell) {
       res.status(404).json({ message: 'No user found with this id!' });
       return;
@@ -67,20 +68,20 @@ router.put('/:id/add', async (req, res) => {
         const newspellIDS = spellIDS.join();
         await User.update({ spellbook: newspellIDS }, {
           where: {
-            id: req.params.id,
+            id: req.session.user_id,
           },
         });
       }
     } else {
       await User.update({ spellbook: spellID }, {
         where: {
-          id: req.params.id,
+          id: req.session.user_id,
         },
       });
     }
     const updatedUser = await User.findOne({
       where: {
-        id: req.params.id,
+        id: req.session.user_id,
       },
     });
     res.status(200).json(updatedUser);
@@ -89,11 +90,12 @@ router.put('/:id/add', async (req, res) => {
   }
 });
 
-router.put('/:id/remove', async (req, res) => {
+router.put('/remove/:spellID', async (req, res) => {
   try {
     const deleteSpell = await User.findOne({
       where: {
-        id: req.params.id,
+        // id: req.params.id,
+        id: req.session.user_id,
       },
     });
     if (!deleteSpell) {
@@ -105,7 +107,7 @@ router.put('/:id/remove', async (req, res) => {
       res.status(404).json({ message: 'No spellbook found with this user id!' })
       return;
     }
-    const spellID = req.body.spellbook;
+    const spellID = req.params.spellID;
     const spellIDS = spellsSTR.split(',').map(Number);
     const index = spellIDS.indexOf(parseInt(spellID));
     if (index > -1) {
@@ -117,12 +119,12 @@ router.put('/:id/remove', async (req, res) => {
     const newSpellIDS = spellIDS.join();
     await User.update({ spellbook: newSpellIDS }, {
       where: {
-        id: req.params.id,
+        id: req.session.user_id,
       },
     });
     const updatedUser = await User.findOne({
       where: {
-        id: req.params.id,
+        id: req.session.user_id,
       },
     });
     res.status(200).json(updatedUser);
