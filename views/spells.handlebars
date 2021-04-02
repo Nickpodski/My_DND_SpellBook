@@ -1,84 +1,34 @@
-<div class="cover p1 page">
-  <h1 id="allspells-h4">Turn to see all spells!</h1>
+<div class="cover page">
+    <h1 id="allspells-h1">Turn to see all spells!</h1>
 </div>
 
-{{#each spells}}
+{{#each spells as |spell|}}
+<div class="desc-spells page">
+<h2 id="spellName">{{this.name}}</h2>
+    {{> allSpells-stats}}
+{{#if this.archetype}}
+    <li class="spellStatsLi">Archetype</li>
+    <li class="spellStatsLi">{{this.archetype}}</li>
+{{/if}}
+</div>
 
-{{!-- ? ^ & ^ --}}
-{{!-- user becomes an object (.this) --}}
-{{!-- <div id="book"> --}}
+<div class="all-spells page">
+    {{> allSpells-desc}}
+</div>
 
-
-  <div class="all-spells p2 page">
-    <div class="allspells-div">
-      {{!Added buton}}
-      <h4 class="allspells-h4">{{this.name}}<button class="add-btn" onclick="addSpellButton({{this.id}})">+</a></button></h4>
-    </div>
-    {{!-- <h4>{{user.name}}</h4> --}}
-    <h5 class="desc-title">Description</h5>
-    {{!-- <p>{{user.desc}}</p> --}}
-    <p id="desc-info">{{{this.desc}}}</p>
-
-  </div>
-  <div class="desc-spells p3 page">
-    <h4 class="allspells-h4">{{this.name}}</h4>
-
-    <div class="info-container">
-      <p class="info-title">Range</p>
-      <p class="info-value">{{this.range}}</p>
-    </div>
-
-    <div class="info-container">
-      <p class="info-title">Components</p>
-      <p class="info-value">{{this.components}}</p>
-    </div>
-    <div class="info-container">
-      <p class="info-title">Ritual</p>
-      <p class="info-value">{{this.ritual}}</p>
-    </div>
-
-    <div class="info-container">
-      <p class="info-title">Concentration</p>
-      <p class="info-value">{{this.concentration}}</p>
-    </div>
-    <div class="info-container">
-      <p class="info-title">Casting Time</p>
-      <p class="info-value">{{this.casting_time}}</p>
-    </div>
-
-    <div class="info-container">
-      <p class="info-title">Level</p>
-      <p class="info-value">{{this.level}}</p>
-    </div>
-    <div class="info-container">
-      <p class="info-title">School</p>
-      <p class="info-value">{{this.school}}</p>
-    </div>
-
-    <div class="info-container">
-      <p class="info-title">Duration</p>
-      <p class="info-value">{{this.duration}}</p>
-    </div>
-    <div class="info-container">
-      <p class="info-title">Material</p>
-      <p class="info-value">{{this.material}}</p>
-    </div>
-    {{#if this.archetype}}
-    <div class="info-container">
-      <p class="info-title">Archetype</p>
-      <p class="info-value">{{this.archetype}}</p>
+ {{#if this.higher_level}}
+    <div class="desc-spells">
+        <h4 class="allspells-h4">{{spell.name}}</h4>
+        <h5 class="desc-title">Higher Level</h5>
+        <section id="description">{{{this.higher_level}}}</section>
     </div>
     {{/if}}
-  </div>
-  {{#if this.higher_level}}
-  <div class="desc-spells p4">
-    <h4 class="allspells-h4">{{this.name}}</h4>
-    <h5 class="desc-title">Higher Level</h5>
-    <p id="desc-info">{{{this.higher_level}}}</p>
-  </div>
-  {{/if}}
+{{/each}};
 
-  {{/each}};
 
-  {{!--
-</div> --}}
+<div class="backOfBookPage page">
+
+</div>
+<div class="backOfBook page">
+
+</div>
