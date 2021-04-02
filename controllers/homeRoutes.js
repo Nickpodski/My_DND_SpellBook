@@ -68,14 +68,17 @@ router.get('/all', withAuth, async (req, res) => {
     });
     // const spell = allClassSpells[0];
     const spells = allClassSpells;
-    console.log("Here is the console" + spells);
+    // console.log("Here is the console" + spells);
     const updatedSpells = spells.map((spell)=>{
       spell.desc = spell.desc.replace(new RegExp('<p>', 'g'),"");
       spell.desc = spell.desc.replace(new RegExp('</p>', 'g'),"");
-      spell.higher_level = spell.desc.replace(new RegExp('<p>', 'g'),"");
-      spell.higher_level = spell.desc.replace(new RegExp('</p>', 'g'),"");
+      if (spells.higher_level != null) {
+        spell.higher_level = spell.higher_level.toString();
+        spell.higher_level = spell.higher_level.replace(new RegExp('<p>', 'g'),"");
+        spell.higher_level = spell.higher_level.replace(new RegExp('</p>', 'g'),"");
+      };
       return spell;
-    })
+    });
     res.render('spells', {
     updatedSpells,
     logged_in: req.session.logged_in,
