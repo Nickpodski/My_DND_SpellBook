@@ -1,3 +1,4 @@
+
 body {
   background-image: url("https://cdn.pixabay.com/photo/2018/03/29/13/15/candle-3272201_960_720.jpg");
   background-repeat: no-repeat;
@@ -50,11 +51,11 @@ body {
   margin: 165px 0px 0px 0px;
 } */
 
-/* #book {
+ #book {
   width: 800px;
   height: 500px;
   /* margin: 12% 12%; */
-/* } 
+} 
 
 /* empty pages */
 /* #book .turn-page {
@@ -91,7 +92,7 @@ body {
   top: 0;
 }
 
-#book {
+/* #book {
   height: 100%;
   transition: margin-left 0.25s ease-out;
   width: 100%;
@@ -101,12 +102,12 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
+} */
 
-.page{
+/* .page{
   height: 100%;
   width: 100%;
-}
+} */
 /* 
 #book .page img {
   max-width: 100%;
@@ -117,6 +118,7 @@ body {
   background-image: url("https://cdn.pixabay.com/photo/2018/07/16/16/55/background-image-3542403_960_720.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  overflow: hidden;
 }
 
 #book .cover h1 {
@@ -347,14 +349,46 @@ font-weight: bold;
   background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-1033117_960_720.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  overflow: hidden;
 }
 
 
 /* **********     User's Spells Pages     ********** */
 .spellPage1, .spellPage2 {
-background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-1033117_960_720.jpg");
+  background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-1033117_960_720.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  font-family: 'Cinzel', serif;
+  overflow: hidden;
+}
+#spellName {
+  font-size: 33px;
+  /* text-align: center; */
+  font-weight: bold;
+  line-height: 50px;
+  padding: 0px 0px 0px 35px;
+}
+.spellStatsLi{
+  padding: 0px 15px 15px 70px;
+  color: red;
+}
+.stat {
+  font-weight: bold;
+  color: black;
+  padding-right: 5px;
+}
+#descTitle {
+  font-size: 19px;
+  font-weight: bold;
+  line-height: 30px;
+  padding: 0px -1px 0px 28px;
+  text-align: center;
+  text-decoration: underline;
+  text-underline-position: under;
+}
+#description {
+  padding: 0px 24px 0px 24px;
+  text-indent: 30px;
 }
 
 /* All Spells Page */
@@ -366,6 +400,7 @@ background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-103
   background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-1033117_960_720.jpg");
   background-position: -75px -10px;
   background-repeat: no-repeat;
+  overflow: hidden;
 }
 #allspells-h4 {
   font-size: 34px;
@@ -386,6 +421,7 @@ background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-103
   font-family: "Cormorant Unicase", serif;
   background-image: url("https://cdn.pixabay.com/photo/2015/11/08/05/58/scroll-1033117_960_720.jpg");
   background-repeat: no-repeat;
+  overflow: hidden;
 }
 .info-container{
   width: 50%;
