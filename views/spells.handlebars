@@ -1,4 +1,4 @@
-    <div class="cover p1">
+ <div class="cover p1 page">
         <h1 id="allspells-h4">Turn to see all spells!</h1>
     </div>
 
@@ -8,15 +8,19 @@
 {{!-- user becomes an object (.this) --}}
 {{!-- <div id="book"> --}}
 
-    <div class="all-spells p2">
-        <h4 class="allspells-h4">{{this.name}}</h4>
+
+    <div class="all-spells p2 page">
+        <div class = "allspells-div">
+        {{!Added buton}}
+        <h4 class="allspells-h4">{{this.name}}<button class = "add-btn">+</button></h4>
+        </div>
         {{!-- <h4>{{user.name}}</h4> --}}
         <h5 class="desc-title">Description</h5>
         {{!-- <p>{{user.desc}}</p> --}}
         <p id="desc-info">{{{this.desc}}}</p>
 
     </div>
-    <div class="desc-spells p3">
+    <div class="desc-spells p3 page">
         <h4 class="allspells-h4">{{this.name}}</h4>
 
         <div class="info-container">
@@ -75,6 +79,8 @@
     {{/if}}
 
 {{/each}};
+
+    {{!--</div> --}}
 
 
 
