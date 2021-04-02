@@ -78,7 +78,7 @@ $(document).ready(function(){
 // else {
 //   book.turn('display','single');
 // }
-// });
+// });  
 
     // $('#book').click(function() {
     //     $('body').css("backdrop-filter", "blur(8px)");
