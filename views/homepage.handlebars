@@ -1,26 +1,18 @@
 {{!-- USER'S SPELLBOOK --}}
 <div class="cover">
-  <h1 id="userNameText">{{name}}s' Spells</h1>
+  {{!-- <h1 id="userNameText">{{name}}s' Spells</h1> --}}
 </div>
-
-
-{{!-- 
-<div class="spellPage1">
-<h2 id="spellName">{{spell.name}}</h2> --}}
 
 {{#each spells as |spell|}}
-<div class="spellInfo">
-{{> spell-details spell}}
-  {{!-- </div> --}}
+<div class="spellPage1">
+<h2 id="spellName">{{this.name}}</h2>
+{{> spell-stats}}
 </div>
 
+<div class="spellPage2">
+{{> spell-desc}}
+</div>
 {{/each}}
-
-{{!-- <div class="spellPage2">
-  <p id="spellDesc">{{{spell.desc}}}</p>
-  <br>
-  <p>{{{spell.higher_level}}}</p>
-</div> --}}
 
 <script>
   var url = "/js/turn.js";
