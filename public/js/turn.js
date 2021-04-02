@@ -1,69 +1,1933 @@
-/* turn.js 4.1.0 | Copyright (c) 2012 Emmanuel Garcia | turnjs.com | turnjs.com/license.txt */
+/**
+ * turn.js 3rd release
+ * www.turnjs.com
+ *
+ * Copyright (C) 2012, Emmanuel Garcia.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ * notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Any redistribution, use, or modification is done solely for personal 
+ * benefit and not for any commercial purpose or for monetary gain.
+ * 
+ **/
 
-(function(f){function I(a,b,c){if(!c[0]||"object"==typeof c[0])return b.init.apply(a,c);if(b[c[0]])return b[c[0]].apply(a,Array.prototype.slice.call(c,1));throw p(c[0]+" is not a method or property");}function l(a,b,c,d){return{css:{position:"absolute",top:a,left:b,overflow:d||"hidden",zIndex:c||"auto"}}}function R(a,b,c,d,e){var h=1-e,f=h*h*h,g=e*e*e;return j(Math.round(f*a.x+3*e*h*h*b.x+3*e*e*h*c.x+g*d.x),Math.round(f*a.y+3*e*h*h*b.y+3*e*e*h*c.y+g*d.y))}function j(a,b){return{x:a,y:b}}function E(a,
-    b,c){return y&&c?" translate3d("+a+"px,"+b+"px, 0px) ":" translate("+a+"px, "+b+"px) "}function F(a){return" rotate("+a+"deg) "}function n(a,b){return Object.prototype.hasOwnProperty.call(b,a)}function S(){for(var a=["Moz","Webkit","Khtml","O","ms"],b=a.length,c="";b--;)a[b]+"Transform"in document.body.style&&(c="-"+a[b].toLowerCase()+"-");return c}function O(a,b,c,d,e){var h,f=[];if("-webkit-"==v){for(h=0;h<e;h++)f.push("color-stop("+d[h][0]+", "+d[h][1]+")");a.css({"background-image":"-webkit-gradient(linear, "+
-    b.x+"% "+b.y+"%,"+c.x+"% "+c.y+"%, "+f.join(",")+" )"})}else{var b={x:b.x/100*a.width(),y:b.y/100*a.height()},c={x:c.x/100*a.width(),y:c.y/100*a.height()},g=c.x-b.x;h=c.y-b.y;var i=Math.atan2(h,g),w=i-Math.PI/2,w=Math.abs(a.width()*Math.sin(w))+Math.abs(a.height()*Math.cos(w)),g=Math.sqrt(h*h+g*g),c=j(c.x<b.x?a.width():0,c.y<b.y?a.height():0),k=Math.tan(i);h=-1/k;k=(h*c.x-c.y-k*b.x+b.y)/(h-k);c=h*k-h*c.x+c.y;b=Math.sqrt(Math.pow(k-b.x,2)+Math.pow(c-b.y,2));for(h=0;h<e;h++)f.push(" "+d[h][1]+" "+100*
-    (b+g*d[h][0])/w+"%");a.css({"background-image":v+"linear-gradient("+-i+"rad,"+f.join(",")+")"})}}function s(a,b,c){a=f.Event(a);b.trigger(a,c);return a.isDefaultPrevented()?"prevented":a.isPropagationStopped()?"stopped":""}function p(a){function b(a){this.name="TurnJsError";this.message=a}b.prototype=Error();b.prototype.constructor=b;return new b(a)}function C(a){var b={top:0,left:0};do b.left+=a.offsetLeft,b.top+=a.offsetTop;while(a=a.offsetParent);return b}var y,T,v="",J=Math.PI,K=J/2,t="ontouchstart"in
-    window,q=t?{down:"touchstart",move:"touchmove",up:"touchend",over:"touchstart",out:"touchend"}:{down:"mousedown",move:"mousemove",up:"mouseup",over:"mouseover",out:"mouseout"},o={backward:["bl","tl"],forward:["br","tr"],all:"tl bl tr br l r".split(" ")},U=["single","double"],V=["ltr","rtl"],W={acceleration:!0,display:"double",duration:600,page:1,gradients:!0,turnCorners:"bl,br",when:null},X={cornerSize:100},g={init:function(a){y="WebKitCSSMatrix"in window||"MozPerspective"in document.body.style;var b;
-    T=(b=/AppleWebkit\/([0-9\.]+)/i.exec(navigator.userAgent))?534.3<parseFloat(b[1]):!0;v=S();var c;b=0;var d=this.data(),e=this.children(),a=f.extend({width:this.width(),height:this.height(),direction:this.attr("dir")||this.css("direction")||"ltr"},W,a);d.opts=a;d.pageObjs={};d.pages={};d.pageWrap={};d.pageZoom={};d.pagePlace={};d.pageMv=[];d.zoom=1;d.totalPages=a.pages||0;d.eventHandlers={touchStart:f.proxy(g._touchStart,this),touchMove:f.proxy(g._touchMove,this),touchEnd:f.proxy(g._touchEnd,this),
-    start:f.proxy(g._eventStart,this)};if(a.when)for(c in a.when)n(c,a.when)&&this.bind(c,a.when[c]);this.css({position:"relative",width:a.width,height:a.height});this.turn("display",a.display);""!==a.direction&&this.turn("direction",a.direction);y&&(!t&&a.acceleration)&&this.transform(E(0,0,!0));for(c=0;c<e.length;c++)"1"!=f(e[c]).attr("ignore")&&this.turn("addPage",e[c],++b);f(this).bind(q.down,d.eventHandlers.touchStart).bind("end",g._eventEnd).bind("pressed",g._eventPressed).bind("released",g._eventReleased).bind("flip",
-    g._flip);f(this).parent().bind("start",d.eventHandlers.start);f(document).bind(q.move,d.eventHandlers.touchMove).bind(q.up,d.eventHandlers.touchEnd);this.turn("page",a.page);d.done=!0;return this},addPage:function(a,b){var c,d=!1,e=this.data(),h=e.totalPages+1;if(e.destroying)return!1;if(c=/\bp([0-9]+)\b/.exec(f(a).attr("class")))b=parseInt(c[1],10);if(b)if(b==h)d=!0;else{if(b>h)throw p('Page "'+b+'" cannot be inserted');}else b=h,d=!0;1<=b&&b<=h&&(c="double"==e.display?b%2?" odd":" even":"",e.done&&
-    this.turn("stop"),b in e.pageObjs&&g._movePages.call(this,b,1),d&&(e.totalPages=h),e.pageObjs[b]=f(a).css({"float":"left"}).addClass("page p"+b+c),-1!=navigator.userAgent.indexOf("MSIE 9.0")&&e.pageObjs[b].hasClass("hard")&&e.pageObjs[b].removeClass("hard"),g._addPage.call(this,b),g._removeFromDOM.call(this));return this},_addPage:function(a){var b=this.data(),c=b.pageObjs[a];if(c)if(g._necessPage.call(this,a)){if(!b.pageWrap[a]){b.pageWrap[a]=f("<div/>",{"class":"page-wrapper",page:a,css:{position:"absolute",
-    overflow:"hidden"}});this.append(b.pageWrap[a]);b.pagePlace[a]||(b.pagePlace[a]=a,b.pageObjs[a].appendTo(b.pageWrap[a]));var d=g._pageSize.call(this,a,!0);c.css({width:d.width,height:d.height});b.pageWrap[a].css(d)}b.pagePlace[a]==a&&g._makeFlip.call(this,a)}else b.pagePlace[a]=0,b.pageObjs[a]&&b.pageObjs[a].remove()},hasPage:function(a){return n(a,this.data().pageObjs)},center:function(a){var b=this.data(),c=f(this).turn("size"),d=0;b.noCenter||("double"==b.display&&(a=this.turn("view",a||b.tpage||
-    b.page),"ltr"==b.direction?a[0]?a[1]||(d+=c.width/4):d-=c.width/4:a[0]?a[1]||(d-=c.width/4):d+=c.width/4),f(this).css({marginLeft:d}));return this},destroy:function(){var a=this,b=this.data(),c="end first flip last pressed released start turning turned zooming missing".split(" ");if("prevented"!=s("destroying",this)){b.destroying=!0;f.each(c,function(b,c){a.unbind(c)});this.parent().unbind("start",b.eventHandlers.start);for(f(document).unbind(q.move,b.eventHandlers.touchMove).unbind(q.up,b.eventHandlers.touchEnd);0!==
-    b.totalPages;)this.turn("removePage",b.totalPages);b.fparent&&b.fparent.remove();b.shadow&&b.shadow.remove();this.removeData();b=null;return this}},is:function(){return"object"==typeof this.data().pages},zoom:function(a){var b=this.data();if("number"==typeof a){if(0.0010>a||100<a)throw p(a+" is not a value for zoom");if("prevented"==s("zooming",this,[a,b.zoom]))return this;var c=this.turn("size"),d=this.turn("view"),e=1/b.zoom,h=Math.round(c.width*e*a),c=Math.round(c.height*e*a);b.zoom=a;f(this).turn("stop").turn("size",
-    h,c);b.opts.autoCenter&&this.turn("center");g._updateShadow.call(this);for(a=0;a<d.length;a++)d[a]&&b.pageZoom[d[a]]!=b.zoom&&(this.trigger("zoomed",[d[a],d,b.pageZoom[d[a]],b.zoom]),b.pageZoom[d[a]]=b.zoom);return this}return b.zoom},_pageSize:function(a,b){var c=this.data(),d={};if("single"==c.display)d.width=this.width(),d.height=this.height(),b&&(d.top=0,d.left=0,d.right="auto");else{var e=this.width()/2,h=this.height();c.pageObjs[a].hasClass("own-size")?(d.width=c.pageObjs[a].width(),d.height=
-    c.pageObjs[a].height()):(d.width=e,d.height=h);if(b){var f=a%2;d.top=(h-d.height)/2;"ltr"==c.direction?(d[f?"right":"left"]=e-d.width,d[f?"left":"right"]="auto"):(d[f?"left":"right"]=e-d.width,d[f?"right":"left"]="auto")}}return d},_makeFlip:function(a){var b=this.data();if(!b.pages[a]&&b.pagePlace[a]==a){var c="single"==b.display,d=a%2;b.pages[a]=b.pageObjs[a].css(g._pageSize.call(this,a)).flip({page:a,next:d||c?a+1:a-1,turn:this}).flip("disable",b.disabled);g._setPageLoc.call(this,a);b.pageZoom[a]=
-    b.zoom}return b.pages[a]},_makeRange:function(){var a,b;if(!(1>this.data().totalPages)){b=this.turn("range");for(a=b[0];a<=b[1];a++)g._addPage.call(this,a)}},range:function(a){var b,c,d,e=this.data(),a=a||e.tpage||e.page||1;d=g._view.call(this,a);if(1>a||a>e.totalPages)throw p('"'+a+'" is not a valid page');d[1]=d[1]||d[0];1<=d[0]&&d[1]<=e.totalPages?(a=Math.floor(2),e.totalPages-d[1]>d[0]?(b=Math.min(d[0]-1,a),c=2*a-b):(c=Math.min(e.totalPages-d[1],a),b=2*a-c)):c=b=5;return[Math.max(1,d[0]-b),Math.min(e.totalPages,
-    d[1]+c)]},_necessPage:function(a){if(0===a)return!0;var b=this.turn("range");return this.data().pageObjs[a].hasClass("fixed")||a>=b[0]&&a<=b[1]},_removeFromDOM:function(){var a,b=this.data();for(a in b.pageWrap)n(a,b.pageWrap)&&!g._necessPage.call(this,a)&&g._removePageFromDOM.call(this,a)},_removePageFromDOM:function(a){var b=this.data();if(b.pages[a]){var c=b.pages[a].data();i._moveFoldingPage.call(b.pages[a],!1);c.f&&c.f.fwrapper&&c.f.fwrapper.remove();b.pages[a].removeData();b.pages[a].remove();
-    delete b.pages[a]}b.pageObjs[a]&&b.pageObjs[a].remove();b.pageWrap[a]&&(b.pageWrap[a].remove(),delete b.pageWrap[a]);g._removeMv.call(this,a);delete b.pagePlace[a];delete b.pageZoom[a]},removePage:function(a){var b=this.data();if("*"==a)for(;0!==b.totalPages;)this.turn("removePage",b.totalPages);else{if(1>a||a>b.totalPages)throw p("The page "+a+" doesn't exist");b.pageObjs[a]&&(this.turn("stop"),g._removePageFromDOM.call(this,a),delete b.pageObjs[a]);g._movePages.call(this,a,-1);b.totalPages-=1;b.page>
-    b.totalPages?(b.page=null,g._fitPage.call(this,b.totalPages)):(g._makeRange.call(this),this.turn("update"))}return this},_movePages:function(a,b){var c,d=this,e=this.data(),h="single"==e.display,f=function(a){var c=a+b,f=c%2,i=f?" odd ":" even ";e.pageObjs[a]&&(e.pageObjs[c]=e.pageObjs[a].removeClass("p"+a+" odd even").addClass("p"+c+i));e.pagePlace[a]&&e.pageWrap[a]&&(e.pagePlace[c]=c,e.pageWrap[c]=e.pageObjs[c].hasClass("fixed")?e.pageWrap[a].attr("page",c):e.pageWrap[a].css(g._pageSize.call(d,
-    c,!0)).attr("page",c),e.pages[a]&&(e.pages[c]=e.pages[a].flip("options",{page:c,next:h||f?c+1:c-1})),b&&(delete e.pages[a],delete e.pagePlace[a],delete e.pageZoom[a],delete e.pageObjs[a],delete e.pageWrap[a]))};if(0<b)for(c=e.totalPages;c>=a;c--)f(c);else for(c=a;c<=e.totalPages;c++)f(c)},display:function(a){var b=this.data(),c=b.display;if(void 0===a)return c;if(-1==f.inArray(a,U))throw p('"'+a+'" is not a value for display');switch(a){case "single":b.pageObjs[0]||(this.turn("stop").css({overflow:"hidden"}),
-    b.pageObjs[0]=f("<div />",{"class":"page p-temporal"}).css({width:this.width(),height:this.height()}).appendTo(this));this.addClass("shadow");break;case "double":b.pageObjs[0]&&(this.turn("stop").css({overflow:""}),b.pageObjs[0].remove(),delete b.pageObjs[0]),this.removeClass("shadow")}b.display=a;c&&(a=this.turn("size"),g._movePages.call(this,1,0),this.turn("size",a.width,a.height).turn("update"));return this},direction:function(a){var b=this.data();if(void 0===a)return b.direction;a=a.toLowerCase();
-    if(-1==f.inArray(a,V))throw p('"'+a+'" is not a value for direction');"rtl"==a&&f(this).attr("dir","ltr").css({direction:"ltr"});b.direction=a;b.done&&this.turn("size",f(this).width(),f(this).height());return this},animating:function(){return 0<this.data().pageMv.length},corner:function(){var a,b,c=this.data();for(b in c.pages)if(n(b,c.pages)&&(a=c.pages[b].flip("corner")))return a;return!1},data:function(){return this.data()},disable:function(a){var b,c=this.data(),d=this.turn("view");c.disabled=
-    void 0===a||!0===a;for(b in c.pages)n(b,c.pages)&&c.pages[b].flip("disable",c.disabled?!0:-1==f.inArray(parseInt(b,10),d));return this},disabled:function(a){return void 0===a?!0===this.data().disabled:this.turn("disable",a)},size:function(a,b){if(void 0===a||void 0===b)return{width:this.width(),height:this.height()};this.turn("stop");var c,d,e=this.data();d="double"==e.display?a/2:a;this.css({width:a,height:b});e.pageObjs[0]&&e.pageObjs[0].css({width:d,height:b});for(c in e.pageWrap)n(c,e.pageWrap)&&
-    (d=g._pageSize.call(this,c,!0),e.pageObjs[c].css({width:d.width,height:d.height}),e.pageWrap[c].css(d),e.pages[c]&&e.pages[c].css({width:d.width,height:d.height}));this.turn("resize");return this},resize:function(){var a,b=this.data();b.pages[0]&&(b.pageWrap[0].css({left:-this.width()}),b.pages[0].flip("resize",!0));for(a=1;a<=b.totalPages;a++)b.pages[a]&&b.pages[a].flip("resize",!0);g._updateShadow.call(this);b.opts.autoCenter&&this.turn("center")},_removeMv:function(a){var b,c=this.data();for(b=
-    0;b<c.pageMv.length;b++)if(c.pageMv[b]==a)return c.pageMv.splice(b,1),!0;return!1},_addMv:function(a){var b=this.data();g._removeMv.call(this,a);b.pageMv.push(a)},_view:function(a){var b=this.data(),a=a||b.page;return"double"==b.display?a%2?[a-1,a]:[a,a+1]:[a]},view:function(a){var b=this.data(),a=g._view.call(this,a);return"double"==b.display?[0<a[0]?a[0]:0,a[1]<=b.totalPages?a[1]:0]:[0<a[0]&&a[0]<=b.totalPages?a[0]:0]},stop:function(a,b){if(this.turn("animating")){var c,d,e,h=this.data();h.tpage&&
-    (h.page=h.tpage,delete h.tpage);for(c=0;c<h.pageMv.length;c++)h.pageMv[c]&&h.pageMv[c]!==a&&(e=h.pages[h.pageMv[c]],d=e.data().f.opts,e.flip("hideFoldedPage",b),b||i._moveFoldingPage.call(e,!1),d.force&&(d.next=0===d.page%2?d.page-1:d.page+1,delete d.force))}this.turn("update");return this},pages:function(a){var b=this.data();if(a){if(a<b.totalPages)for(var c=b.totalPages;c>a;c--)this.turn("removePage",c);b.totalPages=a;g._fitPage.call(this,b.page);return this}return b.totalPages},_missing:function(a){var b=
-    this.data();if(!(1>b.totalPages)){for(var c=this.turn("range",a),d=[],a=c[0];a<=c[1];a++)b.pageObjs[a]||d.push(a);0<d.length&&this.trigger("missing",[d])}},_fitPage:function(a){var b=this.data(),c=this.turn("view",a);g._missing.call(this,a);if(b.pageObjs[a]){b.page=a;this.turn("stop");for(var d=0;d<c.length;d++)c[d]&&b.pageZoom[c[d]]!=b.zoom&&(this.trigger("zoomed",[c[d],c,b.pageZoom[c[d]],b.zoom]),b.pageZoom[c[d]]=b.zoom);g._removeFromDOM.call(this);g._makeRange.call(this);g._updateShadow.call(this);
-    this.trigger("turned",[a,c]);this.turn("update");b.opts.autoCenter&&this.turn("center")}},_turnPage:function(a){var b,c,d=this.data(),e=d.pagePlace[a],h=this.turn("view"),i=this.turn("view",a);if(d.page!=a){var j=d.page;if("prevented"==s("turning",this,[a,i])){j==d.page&&-1!=f.inArray(e,d.pageMv)&&d.pages[e].flip("hideFoldedPage",!0);return}-1!=f.inArray(1,i)&&this.trigger("first");-1!=f.inArray(d.totalPages,i)&&this.trigger("last")}"single"==d.display?(b=h[0],c=i[0]):h[1]&&a>h[1]?(b=h[1],c=i[0]):
-    h[0]&&a<h[0]&&(b=h[0],c=i[1]);e=d.opts.turnCorners.split(",");h=d.pages[b].data().f;i=h.opts;j=h.point;g._missing.call(this,a);d.pageObjs[a]&&(this.turn("stop"),d.page=a,g._makeRange.call(this),d.tpage=c,i.next!=c&&(i.next=c,i.force=!0),this.turn("update"),h.point=j,"hard"==h.effect?"ltr"==d.direction?d.pages[b].flip("turnPage",a>b?"r":"l"):d.pages[b].flip("turnPage",a>b?"l":"r"):"ltr"==d.direction?d.pages[b].flip("turnPage",e[a>b?1:0]):d.pages[b].flip("turnPage",e[a>b?0:1]))},page:function(a){var b=
-    this.data();if(void 0===a)return b.page;if(!b.disabled&&!b.destroying){a=parseInt(a,10);if(0<a&&a<=b.totalPages)return a!=b.page&&(!b.done||-1!=f.inArray(a,this.turn("view"))?g._fitPage.call(this,a):g._turnPage.call(this,a)),this;throw p("The page "+a+" does not exist");}},next:function(){return this.turn("page",Math.min(this.data().totalPages,g._view.call(this,this.data().page).pop()+1))},previous:function(){return this.turn("page",Math.max(1,g._view.call(this,this.data().page).shift()-1))},peel:function(a,
-    b){var c=this.data(),d=this.turn("view"),b=void 0===b?!0:!0===b;!1===a?this.turn("stop",null,b):"single"==c.display?c.pages[c.page].flip("peel",a,b):(d="ltr"==c.direction?-1!=a.indexOf("l")?d[0]:d[1]:-1!=a.indexOf("l")?d[1]:d[0],c.pages[d]&&c.pages[d].flip("peel",a,b));return this},_addMotionPage:function(){var a=f(this).data().f.opts,b=a.turn;b.data();g._addMv.call(b,a.page)},_eventStart:function(a,b,c){var d=b.turn.data(),e=d.pageZoom[b.page];a.isDefaultPrevented()||(e&&e!=d.zoom&&(b.turn.trigger("zoomed",
-    [b.page,b.turn.turn("view",b.page),e,d.zoom]),d.pageZoom[b.page]=d.zoom),"single"==d.display&&c&&("l"==c.charAt(1)&&"ltr"==d.direction||"r"==c.charAt(1)&&"rtl"==d.direction?(b.next=b.next<b.page?b.next:b.page-1,b.force=!0):b.next=b.next>b.page?b.next:b.page+1),g._addMotionPage.call(a.target));g._updateShadow.call(b.turn)},_eventEnd:function(a,b,c){f(a.target).data();var a=b.turn,d=a.data();if(c){if(c=d.tpage||d.page,c==b.next||c==b.page)delete d.tpage,g._fitPage.call(a,c||b.next,!0)}else g._removeMv.call(a,
-    b.page),g._updateShadow.call(a),a.turn("update")},_eventPressed:function(a){var a=f(a.target).data().f,b=a.opts.turn;b.data().mouseAction=!0;b.turn("update");return a.time=(new Date).getTime()},_eventReleased:function(a,b){var c;c=f(a.target);var d=c.data().f,e=d.opts.turn,h=e.data();c="single"==h.display?"br"==b.corner||"tr"==b.corner?b.x<c.width()/2:b.x>c.width()/2:0>b.x||b.x>c.width();if(200>(new Date).getTime()-d.time||c)a.preventDefault(),g._turnPage.call(e,d.opts.next);h.mouseAction=!1},_flip:function(a){a.stopPropagation();
-    a=f(a.target).data().f.opts;a.turn.trigger("turn",[a.next]);a.turn.data().opts.autoCenter&&a.turn.turn("center",a.next)},_touchStart:function(){var a=this.data(),b;for(b in a.pages)if(n(b,a.pages)&&!1===i._eventStart.apply(a.pages[b],arguments))return!1},_touchMove:function(){var a=this.data(),b;for(b in a.pages)n(b,a.pages)&&i._eventMove.apply(a.pages[b],arguments)},_touchEnd:function(){var a=this.data(),b;for(b in a.pages)n(b,a.pages)&&i._eventEnd.apply(a.pages[b],arguments)},calculateZ:function(a){var b,
-    c,d,e,h=this,f=this.data();b=this.turn("view");var i=b[0]||b[1],g=a.length-1,j={pageZ:{},partZ:{},pageV:{}},k=function(a){a=h.turn("view",a);a[0]&&(j.pageV[a[0]]=!0);a[1]&&(j.pageV[a[1]]=!0)};for(b=0;b<=g;b++)c=a[b],d=f.pages[c].data().f.opts.next,e=f.pagePlace[c],k(c),k(d),c=f.pagePlace[d]==d?d:c,j.pageZ[c]=f.totalPages-Math.abs(i-c),j.partZ[e]=2*f.totalPages-g+b;return j},update:function(){var a,b=this.data();if(this.turn("animating")&&0!==b.pageMv[0]){var c,d=this.turn("calculateZ",b.pageMv),e=
-    this.turn("corner"),h=this.turn("view"),i=this.turn("view",b.tpage);for(a in b.pageWrap)if(n(a,b.pageWrap)&&(c=b.pageObjs[a].hasClass("fixed"),b.pageWrap[a].css({display:d.pageV[a]||c?"":"none",zIndex:(b.pageObjs[a].hasClass("hard")?d.partZ[a]:d.pageZ[a])||(c?-1:0)}),c=b.pages[a]))c.flip("z",d.partZ[a]||null),d.pageV[a]&&c.flip("resize"),b.tpage?c.flip("hover",!1).flip("disable",-1==f.inArray(parseInt(a,10),b.pageMv)&&a!=i[0]&&a!=i[1]):c.flip("hover",!1===e).flip("disable",a!=h[0]&&a!=h[1])}else for(a in b.pageWrap)n(a,
-    b.pageWrap)&&(d=g._setPageLoc.call(this,a),b.pages[a]&&b.pages[a].flip("disable",b.disabled||1!=d).flip("hover",!0).flip("z",null));return this},_updateShadow:function(){var a,b,c=this.data(),d=this.width(),e=this.height(),h="single"==c.display?d:d/2;a=this.turn("view");c.shadow||(c.shadow=f("<div />",{"class":"shadow",css:l(0,0,0).css}).appendTo(this));for(var i=0;i<c.pageMv.length&&a[0]&&a[1];i++)a=this.turn("view",c.pages[c.pageMv[i]].data().f.opts.next),b=this.turn("view",c.pageMv[i]),a[0]=a[0]&&
-    b[0],a[1]=a[1]&&b[1];switch(a[0]?a[1]?3:"ltr"==c.direction?2:1:"ltr"==c.direction?1:2){case 1:c.shadow.css({width:h,height:e,top:0,left:h});break;case 2:c.shadow.css({width:h,height:e,top:0,left:0});break;case 3:c.shadow.css({width:d,height:e,top:0,left:0})}},_setPageLoc:function(a){var b=this.data(),c=this.turn("view"),d=0;if(a==c[0]||a==c[1])d=1;else if("single"==b.display&&a==c[0]+1||"double"==b.display&&a==c[0]-2||a==c[1]+2)d=2;if(!this.turn("animating"))switch(d){case 1:b.pageWrap[a].css({zIndex:b.totalPages,
-    display:""});break;case 2:b.pageWrap[a].css({zIndex:b.totalPages-1,display:""});break;case 0:b.pageWrap[a].css({zIndex:0,display:b.pageObjs[a].hasClass("fixed")?"":"none"})}return d},options:function(a){if(void 0===a)return this.data().opts;var b=this.data();f.extend(b.opts,a);a.pages&&this.turn("pages",a.pages);a.page&&this.turn("page",a.page);a.display&&this.turn("display",a.display);a.direction&&this.turn("direction",a.direction);a.width&&a.height&&this.turn("size",a.width,a.height);if(a.when)for(var c in a.when)n(c,
-    a.when)&&this.unbind(c).bind(c,a.when[c]);return this},version:function(){return"4.1.0"}},i={init:function(a){this.data({f:{disabled:!1,hover:!1,effect:this.hasClass("hard")?"hard":"sheet"}});this.flip("options",a);i._addPageWrapper.call(this);return this},setData:function(a){var b=this.data();b.f=f.extend(b.f,a);return this},options:function(a){var b=this.data().f;return a?(i.setData.call(this,{opts:f.extend({},b.opts||X,a)}),this):b.opts},z:function(a){var b=this.data().f;b.opts["z-index"]=a;b.fwrapper&&
-    b.fwrapper.css({zIndex:a||parseInt(b.parent.css("z-index"),10)||0});return this},_cAllowed:function(){var a=this.data().f,b=a.opts.page,c=a.opts.turn.data(),d=b%2;return"hard"==a.effect?"ltr"==c.direction?[d?"r":"l"]:[d?"l":"r"]:"single"==c.display?1==b?"ltr"==c.direction?o.forward:o.backward:b==c.totalPages?"ltr"==c.direction?o.backward:o.forward:o.all:"ltr"==c.direction?o[d?"forward":"backward"]:o[d?"backward":"forward"]},_cornerActivated:function(a){var b=this.data().f,c=this.width(),d=this.height(),
-    a={x:a.x,y:a.y,corner:""},e=b.opts.cornerSize;if(0>=a.x||0>=a.y||a.x>=c||a.y>=d)return!1;var h=i._cAllowed.call(this);switch(b.effect){case "hard":if(a.x>c-e)a.corner="r";else if(a.x<e)a.corner="l";else return!1;break;case "sheet":if(a.y<e)a.corner+="t";else if(a.y>=d-e)a.corner+="b";else return!1;if(a.x<=e)a.corner+="l";else if(a.x>=c-e)a.corner+="r";else return!1}return!a.corner||-1==f.inArray(a.corner,h)?!1:a},_isIArea:function(a){var b=this.data().f.parent.offset(),a=t&&a.originalEvent?a.originalEvent.touches[0]:
-    a;return i._cornerActivated.call(this,{x:a.pageX-b.left,y:a.pageY-b.top})},_c:function(a,b){b=b||0;switch(a){case "tl":return j(b,b);case "tr":return j(this.width()-b,b);case "bl":return j(b,this.height()-b);case "br":return j(this.width()-b,this.height()-b);case "l":return j(b,0);case "r":return j(this.width()-b,0)}},_c2:function(a){switch(a){case "tl":return j(2*this.width(),0);case "tr":return j(-this.width(),0);case "bl":return j(2*this.width(),this.height());case "br":return j(-this.width(),
-    this.height());case "l":return j(2*this.width(),0);case "r":return j(-this.width(),0)}},_foldingPage:function(){var a=this.data().f;if(a){var b=a.opts;if(b.turn)return a=b.turn.data(),"single"==a.display?1<b.next||1<b.page?a.pageObjs[0]:null:a.pageObjs[b.next]}},_backGradient:function(){var a=this.data().f,b=a.opts.turn.data();if((b=b.opts.gradients&&("single"==b.display||2!=a.opts.page&&a.opts.page!=b.totalPages-1))&&!a.bshadow)a.bshadow=f("<div/>",l(0,0,1)).css({position:"",width:this.width(),height:this.height()}).appendTo(a.parent);
-    return b},type:function(){return this.data().f.effect},resize:function(a){var b=this.data().f,c=b.opts.turn.data(),d=this.width(),e=this.height();switch(b.effect){case "hard":a&&(b.wrapper.css({width:d,height:e}),b.fpage.css({width:d,height:e}),c.opts.gradients&&(b.ashadow.css({width:d,height:e}),b.bshadow.css({width:d,height:e})));break;case "sheet":a&&(a=Math.round(Math.sqrt(Math.pow(d,2)+Math.pow(e,2))),b.wrapper.css({width:a,height:a}),b.fwrapper.css({width:a,height:a}).children(":first-child").css({width:d,
-    height:e}),b.fpage.css({width:d,height:e}),c.opts.gradients&&b.ashadow.css({width:d,height:e}),i._backGradient.call(this)&&b.bshadow.css({width:d,height:e})),b.parent.is(":visible")&&(c=C(b.parent[0]),b.fwrapper.css({top:c.top,left:c.left}),c=C(b.opts.turn[0]),b.fparent.css({top:-c.top,left:-c.left})),this.flip("z",b.opts["z-index"])}},_addPageWrapper:function(){var a=this.data().f,b=a.opts.turn.data(),c=this.parent();a.parent=c;if(!a.wrapper)switch(a.effect){case "hard":var d={};d[v+"transform-style"]=
-    "preserve-3d";d[v+"backface-visibility"]="hidden";a.wrapper=f("<div/>",l(0,0,2)).css(d).appendTo(c).prepend(this);a.fpage=f("<div/>",l(0,0,1)).css(d).appendTo(c);b.opts.gradients&&(a.ashadow=f("<div/>",l(0,0,0)).hide().appendTo(c),a.bshadow=f("<div/>",l(0,0,0)));break;case "sheet":var d=this.width(),e=this.height();Math.round(Math.sqrt(Math.pow(d,2)+Math.pow(e,2)));a.fparent=a.opts.turn.data().fparent;a.fparent||(d=f("<div/>",{css:{"pointer-events":"none"}}).hide(),d.data().flips=0,d.css(l(0,0,"auto",
-    "visible").css).appendTo(a.opts.turn),a.opts.turn.data().fparent=d,a.fparent=d);this.css({position:"absolute",top:0,left:0,bottom:"auto",right:"auto"});a.wrapper=f("<div/>",l(0,0,this.css("z-index"))).appendTo(c).prepend(this);a.fwrapper=f("<div/>",l(c.offset().top,c.offset().left)).hide().appendTo(a.fparent);a.fpage=f("<div/>",l(0,0,0,"visible")).css({cursor:"default"}).appendTo(a.fwrapper);b.opts.gradients&&(a.ashadow=f("<div/>",l(0,0,1)).appendTo(a.fpage));i.setData.call(this,a)}i.resize.call(this,
-    !0)},_fold:function(a){var b=this.data().f,c=b.opts.turn.data(),d=i._c.call(this,a.corner),e=this.width(),h=this.height();switch(b.effect){case "hard":a.x="l"==a.corner?Math.min(Math.max(a.x,0),2*e):Math.max(Math.min(a.x,e),-e);var f,g,r,w,k,n=c.totalPages,l=b.opts["z-index"]||n,p={overflow:"visible"},o=d.x?(d.x-a.x)/e:a.x/e,q=90*o,s=90>q;switch(a.corner){case "l":w="0% 50%";k="100% 50%";s?(f=0,g=0<b.opts.next-1,r=1):(f="100%",g=b.opts.page+1<n,r=0);break;case "r":w="100% 50%",k="0% 50%",q=-q,e=-e,
-    s?(f=0,g=b.opts.next+1<n,r=0):(f="-100%",g=1!=b.opts.page,r=1)}p[v+"perspective-origin"]=k;b.wrapper.transform("rotateY("+q+"deg)translate3d(0px, 0px, "+(this.attr("depth")||0)+"px)",k);b.fpage.transform("translateX("+e+"px) rotateY("+(180+q)+"deg)",w);b.parent.css(p);s?(o=-o+1,b.wrapper.css({zIndex:l+1}),b.fpage.css({zIndex:l})):(o-=1,b.wrapper.css({zIndex:l}),b.fpage.css({zIndex:l+1}));c.opts.gradients&&(g?b.ashadow.css({display:"",left:f,backgroundColor:"rgba(0,0,0,"+0.5*o+")"}).transform("rotateY(0deg)"):
-    b.ashadow.hide(),b.bshadow.css({opacity:-o+1}),s?b.bshadow.parent()[0]!=b.wrapper[0]&&b.bshadow.appendTo(b.wrapper):b.bshadow.parent()[0]!=b.fpage[0]&&b.bshadow.appendTo(b.fpage),O(b.bshadow,j(100*r,0),j(100*(-r+1),0),[[0,"rgba(0,0,0,0.3)"],[1,"rgba(0,0,0,0)"]],2));break;case "sheet":var t=this,G=0,y,z,A,L,x,M,C,u=j(0,0),P=j(0,0),m=j(0,0),I=i._foldingPage.call(this);Math.tan(0);var N=c.opts.acceleration,Q=b.wrapper.height(),D="t"==a.corner.substr(0,1),B="l"==a.corner.substr(1,1),H=function(){var b=
-    j(0,0),f=j(0,0);b.x=d.x?d.x-a.x:a.x;b.y=T?d.y?d.y-a.y:a.y:0;f.x=B?e-b.x/2:a.x+b.x/2;f.y=b.y/2;var g=K-Math.atan2(b.y,b.x),k=g-Math.atan2(f.y,f.x),k=Math.max(0,Math.sin(k)*Math.sqrt(Math.pow(f.x,2)+Math.pow(f.y,2)));G=180*(g/J);m=j(k*Math.sin(g),k*Math.cos(g));if(g>K&&(m.x+=Math.abs(m.y*b.y/b.x),m.y=0,Math.round(m.x*Math.tan(J-g))<h))return a.y=Math.sqrt(Math.pow(h,2)+2*f.x*b.x),D&&(a.y=h-a.y),H();if(g>K&&(b=J-g,f=Q-h/Math.sin(b),u=j(Math.round(f*Math.cos(b)),Math.round(f*Math.sin(b))),B&&(u.x=-u.x),
-    D))u.y=-u.y;y=Math.round(m.y/Math.tan(g)+m.x);b=e-y;f=b*Math.cos(2*g);k=b*Math.sin(2*g);P=j(Math.round(B?b-f:y+f),Math.round(D?k:h-k));if(c.opts.gradients&&(x=b*Math.sin(g),b=i._c2.call(t,a.corner),b=Math.sqrt(Math.pow(b.x-a.x,2)+Math.pow(b.y-a.y,2))/e,C=Math.sin(K*(1<b?2-b:b)),M=Math.min(b,1),L=100<x?(x-100)/x:0,z=j(100*(x*Math.sin(g)/e),100*(x*Math.cos(g)/h)),i._backGradient.call(t)&&(A=j(100*(1.2*x*Math.sin(g)/e),100*(1.2*x*Math.cos(g)/h)),B||(A.x=100-A.x),!D)))A.y=100-A.y;m.x=Math.round(m.x);
-    m.y=Math.round(m.y);return!0};f=function(a,d,f,g){var k=["0","auto"],m=(e-Q)*f[0]/100,l=(h-Q)*f[1]/100,d={left:k[d[0]],top:k[d[1]],right:k[d[2]],bottom:k[d[3]]},k={},n=90!=g&&-90!=g?B?-1:1:0,r=f[0]+"% "+f[1]+"%";t.css(d).transform(F(g)+E(a.x+n,a.y,N),r);b.fpage.css(d).transform(F(g)+E(a.x+P.x-u.x-e*f[0]/100,a.y+P.y-u.y-h*f[1]/100,N)+F((180/g-2)*g),r);b.wrapper.transform(E(-a.x+m-n,-a.y+l,N)+F(-g),r);b.fwrapper.transform(E(-a.x+u.x+m,-a.y+u.y+l,N)+F(-g),r);c.opts.gradients&&(f[0]&&(z.x=100-z.x),f[1]&&
-    (z.y=100-z.y),k["box-shadow"]="0 0 20px rgba(0,0,0,"+0.5*C+")",I.css(k),O(b.ashadow,j(B?100:0,D?0:100),j(z.x,z.y),[[L,"rgba(0,0,0,0)"],[0.8*(1-L)+L,"rgba(0,0,0,"+0.2*M+")"],[1,"rgba(255,255,255,"+0.2*M+")"]],3,0),i._backGradient.call(t)&&O(b.bshadow,j(B?0:100,D?0:100),j(A.x,A.y),[[0.6,"rgba(0,0,0,0)"],[0.8,"rgba(0,0,0,"+0.3*M+")"],[1,"rgba(0,0,0,0)"]],3))};switch(a.corner){case "tl":a.x=Math.max(a.x,1);H();f(m,[1,0,0,1],[100,0],G);break;case "tr":a.x=Math.min(a.x,e-1);H();f(j(-m.x,m.y),[0,0,0,1],
-    [0,0],-G);break;case "bl":a.x=Math.max(a.x,1);H();f(j(m.x,-m.y),[1,1,0,0],[100,100],-G);break;case "br":a.x=Math.min(a.x,e-1),H(),f(j(-m.x,-m.y),[0,1,1,0],[0,100],G)}}b.point=a},_moveFoldingPage:function(a){var b=this.data().f;if(b){var c=b.opts.turn,d=c.data(),e=d.pagePlace;a?(d=b.opts.next,e[d]!=b.opts.page&&(b.folding&&i._moveFoldingPage.call(this,!1),i._foldingPage.call(this).appendTo(b.fpage),e[d]=b.opts.page,b.folding=d),c.turn("update")):b.folding&&(d.pages[b.folding]?(c=d.pages[b.folding].data().f,
-    d.pageObjs[b.folding].appendTo(c.wrapper)):d.pageWrap[b.folding]&&d.pageObjs[b.folding].appendTo(d.pageWrap[b.folding]),b.folding in e&&(e[b.folding]=b.folding),delete b.folding)}},_showFoldedPage:function(a,b){var c=i._foldingPage.call(this),d=this.data(),e=d.f,f=e.visible;if(c){if(!f||!e.point||e.point.corner!=a.corner)if(c="hover"==e.status||"peel"==e.status||e.opts.turn.data().mouseAction?a.corner:null,f=!1,"prevented"==s("start",this,[e.opts,c]))return!1;if(b){var g=this,d=e.point&&e.point.corner==
-    a.corner?e.point:i._c.call(this,a.corner,1);this.animatef({from:[d.x,d.y],to:[a.x,a.y],duration:500,frame:function(b){a.x=Math.round(b[0]);a.y=Math.round(b[1]);i._fold.call(g,a)}})}else i._fold.call(this,a),d.effect&&!d.effect.turning&&this.animatef(!1);if(!f)switch(e.effect){case "hard":e.visible=!0;i._moveFoldingPage.call(this,!0);e.fpage.show();e.opts.shadows&&e.bshadow.show();break;case "sheet":e.visible=!0,e.fparent.show().data().flips++,i._moveFoldingPage.call(this,!0),e.fwrapper.show(),e.bshadow&&
-    e.bshadow.show()}return!0}return!1},hide:function(){var a=this.data().f,b=a.opts.turn.data(),c=i._foldingPage.call(this);switch(a.effect){case "hard":b.opts.gradients&&(a.bshadowLoc=0,a.bshadow.remove(),a.ashadow.hide());a.wrapper.transform("");a.fpage.hide();break;case "sheet":0===--a.fparent.data().flips&&a.fparent.hide(),this.css({left:0,top:0,right:"auto",bottom:"auto"}).transform(""),a.wrapper.transform(""),a.fwrapper.hide(),a.bshadow&&a.bshadow.hide(),c.transform("")}a.visible=!1;return this},
-    hideFoldedPage:function(a){var b=this.data().f;if(b.point){var c=this,d=b.point,e=function(){b.point=null;b.status="";c.flip("hide");c.trigger("end",[b.opts,!1])};if(a){var f=i._c.call(this,d.corner),a="t"==d.corner.substr(0,1)?Math.min(0,d.y-f.y)/2:Math.max(0,d.y-f.y)/2,g=j(d.x,d.y+a),l=j(f.x,f.y-a);this.animatef({from:0,to:1,frame:function(a){a=R(d,g,l,f,a);d.x=a.x;d.y=a.y;i._fold.call(c,d)},complete:e,duration:800,hiding:!0})}else this.animatef(!1),e()}},turnPage:function(a){var b=this,c=this.data().f,
-    d=c.opts.turn.data(),a={corner:c.corner?c.corner.corner:a||i._cAllowed.call(this)[0]},e=c.point||i._c.call(this,a.corner,c.opts.turn?d.opts.elevation:0),f=i._c2.call(this,a.corner);this.trigger("flip").animatef({from:0,to:1,frame:function(c){c=R(e,e,f,f,c);a.x=c.x;a.y=c.y;i._showFoldedPage.call(b,a)},complete:function(){b.trigger("end",[c.opts,!0])},duration:d.opts.duration,turning:!0});c.corner=null},moving:function(){return"effect"in this.data()},isTurning:function(){return this.flip("moving")&&
-    this.data().effect.turning},corner:function(){return this.data().f.corner},_eventStart:function(a){var b=this.data().f,c=b.opts.turn;if(!b.corner&&!b.disabled&&!this.flip("isTurning")&&b.opts.page==c.data().pagePlace[b.opts.page]){b.corner=i._isIArea.call(this,a);if(b.corner&&i._foldingPage.call(this))return this.trigger("pressed",[b.point]),i._showFoldedPage.call(this,b.corner),!1;b.corner=null}},_eventMove:function(a){var b=this.data().f;if(!b.disabled)if(a=t?a.originalEvent.touches:[a],b.corner){var c=
-    b.parent.offset();b.corner.x=a[0].pageX-c.left;b.corner.y=a[0].pageY-c.top;i._showFoldedPage.call(this,b.corner)}else if(b.hover&&!this.data().effect&&this.is(":visible"))if(a=i._isIArea.call(this,a[0])){if("sheet"==b.effect&&2==a.corner.length||"hard"==b.effect)b.status="hover",b=i._c.call(this,a.corner,b.opts.cornerSize/2),a.x=b.x,a.y=b.y,i._showFoldedPage.call(this,a,!0)}else"hover"==b.status&&(b.status="",i.hideFoldedPage.call(this,!0))},_eventEnd:function(){var a=this.data().f,b=a.corner;!a.disabled&&
-    b&&"prevented"!=s("released",this,[a.point||b])&&i.hideFoldedPage.call(this,!0);a.corner=null},disable:function(a){i.setData.call(this,{disabled:a});return this},hover:function(a){i.setData.call(this,{hover:a});return this},peel:function(a,b){var c=this.data().f;if(a){if(-1==f.inArray(a,o.all))throw p("Corner "+a+" is not permitted");if(-1!=f.inArray(a,i._cAllowed.call(this))){var d=i._c.call(this,a,c.opts.cornerSize/2);c.status="peel";i._showFoldedPage.call(this,{corner:a,x:d.x,y:d.y},b)}}else c.status=
-    "",i.hideFoldedPage.call(this,b);return this}};window.requestAnim=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(a){window.setTimeout(a,1E3/60)};f.extend(f.fn,{flip:function(){return I(f(this[0]),i,arguments)},turn:function(){return I(f(this[0]),g,arguments)},transform:function(a,b){var c={};b&&(c[v+"transform-origin"]=b);c[v+"transform"]=a;return this.css(c)},animatef:function(a){var b=
-    this.data();b.effect&&b.effect.stop();if(a){a.to.length||(a.to=[a.to]);a.from.length||(a.from=[a.from]);for(var c=[],d=a.to.length,e=!0,g=this,i=(new Date).getTime(),j=function(){if(b.effect&&e){for(var f=[],k=Math.min(a.duration,(new Date).getTime()-i),l=0;l<d;l++)f.push(b.effect.easing(1,k,a.from[l],c[l],a.duration));a.frame(d==1?f[0]:f);if(k==a.duration){delete b.effect;g.data(b);a.complete&&a.complete()}else window.requestAnim(j)}},l=0;l<d;l++)c.push(a.to[l]-a.from[l]);b.effect=f.extend({stop:function(){e=
-    false},easing:function(a,b,c,d,e){return d*Math.sqrt(1-(b=b/e-1)*b)+c}},a);this.data(b);j()}else delete b.effect}});f.isTouch=t;f.mouseEvents=q;f.cssPrefix=S;f.cssTransitionEnd=function(){var a,b=document.createElement("fakeelement"),c={transition:"transitionend",OTransition:"oTransitionEnd",MSTransition:"transitionend",MozTransition:"transitionend",WebkitTransition:"webkitTransitionEnd"};for(a in c)if(void 0!==b.style[a])return c[a]};f.findPos=C})(jQuery);
+ (function($) {
+
+    'use strict';
     
+    var has3d,
+    
+        vendor ='',
+    
+        PI = Math.PI,
+    
+        A90 = PI/2,
+    
+        isTouch = 'ontouchstart' in window,
+    
+        events = (isTouch) ? {start: 'touchstart', move: 'touchmove', end: 'touchend'}
+                : {start: 'mousedown', move: 'mousemove', end: 'mouseup'},
+    
+        // Contansts used for each corner
+        // tl * tr
+        // *     *
+        // bl * br
+    
+        corners = {
+            backward: ['bl', 'tl'],
+            forward: ['br', 'tr'],
+            all: ['tl', 'bl', 'tr', 'br']
+        },
+    
+        displays = ['single', 'double'],
+    
+        // Default options
+    
+        turnOptions = {
+    
+            // First page
+    
+            page: 1,
+            
+            // Enables gradients
+    
+            gradients: true,
+    
+            // Duration of transition in milliseconds
+    
+            duration: 600,
+    
+            // Enables hardware acceleration
+    
+            acceleration: true,
+    
+            // Display
+    
+            display: 'double',
+    
+            // Events
+    
+            when: null
+        },
+    
+        flipOptions = {
+    
+            // Back page
+            
+            folding: null,
+    
+            // Corners
+            // backward: Activates both tl and bl corners
+            // forward: Activates both tr and br corners
+            // all: Activates all the corners
+    
+            corners: 'forward',
+            
+            // Size of the active zone of each corner
+    
+            cornerSize: 100,
+    
+            // Enables gradients
+    
+            gradients: true,
+    
+            // Duration of transition in milliseconds
+    
+            duration: 600,
+    
+            // Enables hardware acceleration
+    
+            acceleration: true
+        },
+    
+        // Number of pages in the DOM, minimum value: 6
+    
+        pagesInDOM = 6,
+        
+        pagePosition = {0: {top: 0, left: 0, right: 'auto', bottom: 'auto'},
+                        1: {top: 0, right: 0, left: 'auto', bottom: 'auto'}},
+    
+        // Gets basic attributes for a layer
+    
+        divAtt = function(top, left, zIndex, overf) {
+            return {'css': {
+                        position: 'absolute',
+                        top: top,
+                        left: left,
+                        'overflow': overf || 'hidden',
+                        'z-index': zIndex || 'auto'
+                        }
+                };
+        },
+    
+        // Gets a 2D point from a bezier curve of four points
+    
+        bezier = function(p1, p2, p3, p4, t) {
+            var mum1 = 1 - t,
+                mum13 = mum1 * mum1 * mum1,
+                mu3 = t * t * t;
+    
+            return point2D(Math.round(mum13*p1.x + 3*t*mum1*mum1*p2.x + 3*t*t*mum1*p3.x + mu3*p4.x),
+                            Math.round(mum13*p1.y + 3*t*mum1*mum1*p2.y + 3*t*t*mum1*p3.y + mu3*p4.y));
+        },
+        
+        // Converts an angle from degrees to radians
+    
+        rad = function(degrees) {
+            return degrees/180*PI;
+        },
+    
+        // Converts an angle from radians to degrees
+    
+        deg = function(radians) {
+            return radians/PI*180;
+        },
+    
+        // Gets a 2D point
+    
+        point2D = function(x, y) {
+            return {x: x, y: y};
+        },
+    
+        // Returns the traslate value
+    
+        translate = function(x, y, use3d) {
+            return (has3d && use3d) ? ' translate3d(' + x + 'px,' + y + 'px, 0px) ' : ' translate(' + x + 'px, ' + y + 'px) ';
+        },
+    
+        // Returns the rotation value
+    
+        rotate = function(degrees) {
+            return ' rotate(' + degrees + 'deg) ';
+        },
+    
+        // Checks if a property belongs to an object
+    
+        has = function(property, object) {
+            return Object.prototype.hasOwnProperty.call(object, property);
+        },
+    
+        // Gets the CSS3 vendor prefix
+    
+        getPrefix = function() {
+            var vendorPrefixes = ['Moz','Webkit','Khtml','O','ms'],
+                len = vendorPrefixes.length,
+                vendor = '';
+    
+            while (len--)
+                if ((vendorPrefixes[len] + 'Transform') in document.body.style)
+                    vendor='-'+vendorPrefixes[len].toLowerCase()+'-';
+    
+            return vendor;
+        },
+    
+        // Adds gradients
+    
+        gradient = function(obj, p0, p1, colors, numColors) {
+        
+            var j, cols = [];
+    
+            if (vendor=='-webkit-') {
+            
+                for (j = 0; j<numColors; j++)
+                        cols.push('color-stop('+colors[j][0]+', '+colors[j][1]+')');
+                
+                obj.css({'background-image': '-webkit-gradient(linear, '+p0.x+'% '+p0.y+'%,  '+p1.x+'% '+p1.y+'%, '+ cols.join(',') +' )'});
+    
+            } else {
+    
+                // This procedure makes the gradients for non-webkit browsers
+                // It will be reduced to one unique way for gradients in next versions
+                
+                p0 = {x:p0.x/100 * obj.width(), y:p0.y/100 * obj.height()};
+                p1 = {x:p1.x/100 * obj.width(), y:p1.y/100 * obj.height()};
+    
+                var dx = p1.x-p0.x,
+                    dy = p1.y-p0.y,
+                    angle = Math.atan2(dy, dx),
+                    angle2 = angle - Math.PI/2,
+                    diagonal = Math.abs(obj.width()*Math.sin(angle2)) + Math.abs(obj.height()*Math.cos(angle2)),
+                    gradientDiagonal = Math.sqrt(dy*dy + dx*dx),
+                    corner = point2D((p1.x<p0.x) ? obj.width() : 0, (p1.y<p0.y) ? obj.height() : 0),
+                    slope = Math.tan(angle),
+                    inverse = -1/slope,
+                    x = (inverse*corner.x - corner.y - slope*p0.x + p0.y) / (inverse-slope),
+                    c = {x: x, y: inverse*x - inverse*corner.x + corner.y},
+                    segA = (Math.sqrt( Math.pow(c.x-p0.x,2) + Math.pow(c.y-p0.y,2)));
+    
+                    for (j = 0; j<numColors; j++)
+                        cols.push(' '+colors[j][1]+' '+(( segA + gradientDiagonal*colors[j][0] )*100/diagonal)+'%');
+            
+                    obj.css({'background-image': vendor+'linear-gradient(' + (-angle) + 'rad,' + cols.join(',') + ')'});
+            }
+        },
+    
+    turnMethods = {
+    
+        // Singleton constructor
+        // $('#selector').turn([options]);
+    
+        init: function(opts) {
+    
+            // Define constants
+            if (has3d===undefined) {
+                has3d = 'WebKitCSSMatrix' in window || 'MozPerspective' in document.body.style;
+                vendor = getPrefix();
+            }
+    
+            var i, data = this.data(), ch = this.children();
+        
+            opts = $.extend({width: this.width(), height: this.height()}, turnOptions, opts);
+            data.opts = opts;
+            data.pageObjs = {};
+            data.pages = {};
+            data.pageWrap = {};
+            data.pagePlace = {};
+            data.pageMv = [];
+            data.totalPages = opts.pages || 0;
+    
+            if (opts.when)
+                for (i in opts.when)
+                    if (has(i, opts.when))
+                        this.bind(i, opts.when[i]);
+    
+    
+            this.css({position: 'relative', width: opts.width, height: opts.height});
+    
+            this.turn('display', opts.display);
+    
+            if (has3d && !isTouch && opts.acceleration)
+                this.transform(translate(0, 0, true));
+        
+            for (i = 0; i<ch.length; i++)
+                this.turn('addPage', ch[i], i+1);
+        
+            this.turn('page', opts.page);
+    
+            // allow setting active corners as an option
+            corners = $.extend({}, corners, opts.corners);
+    
+            // Event listeners
+    
+            $(this).bind(events.start, function(e) {
+                for (var page in data.pages)
+                    if (has(page, data.pages) && flipMethods._eventStart.call(data.pages[page], e)===false)
+                        return false;
+            });
+                
+            $(document).bind(events.move, function(e) {
+                for (var page in data.pages)
+                    if (has(page, data.pages))
+                        flipMethods._eventMove.call(data.pages[page], e);
+            }).
+            bind(events.end, function(e) {
+                for (var page in data.pages)
+                    if (has(page, data.pages))
+                        flipMethods._eventEnd.call(data.pages[page], e);
+    
+            });
+    
+            data.done = true;
+    
+            return this;
+        },
+    
+        // Adds a page from external data
+    
+        addPage: function(element, page) {
+    
+            var incPages = false,
+                data = this.data(),
+                lastPage = data.totalPages+1;
+    
+            if (page) {
+                if (page==lastPage) {
+                    page = lastPage;
+                    incPages = true;
+                } else if (page>lastPage)
+                    throw new Error ('It is impossible to add the page "'+page+'", the maximum value is: "'+lastPage+'"');
+    
+            } else {
+                page = lastPage;
+                incPages = true;
+            }
+    
+            if (page>=1 && page<=lastPage) {
+    
+                // Stop animations
+                if (data.done) this.turn('stop');
+    
+                // Move pages if it's necessary
+                if (page in data.pageObjs)
+                    turnMethods._movePages.call(this, page, 1);
+    
+                // Update number of pages
+                if (incPages)
+                    data.totalPages = lastPage;
+    
+                // Add element
+                data.pageObjs[page] = $(element).addClass('turn-page p' + page);
+    
+                // Add page
+                turnMethods._addPage.call(this, page);
+    
+                // Update view
+                if (data.done)
+                    this.turn('update');
+    
+                turnMethods._removeFromDOM.call(this);
+            }
+    
+            return this;
+        },
+    
+        // Adds a page from internal data
+    
+        _addPage: function(page) {
+            
+            var data = this.data(),
+                element = data.pageObjs[page];
+    
+            if (element)
+                if (turnMethods._necessPage.call(this, page)) {
+                    
+                    if (!data.pageWrap[page]) {
+    
+                        var pageWidth = (data.display=='double') ? this.width()/2 : this.width(),
+                            pageHeight = this.height();
+    
+                        element.css({width:pageWidth, height:pageHeight});
+    
+                        // Place
+                        data.pagePlace[page] = page;
+    
+                        // Wrapper
+                        data.pageWrap[page] = $('<div/>', {'class': 'turn-page-wrapper',
+                                                        page: page,
+                                                        css: {position: 'absolute',
+                                                        overflow: 'hidden',
+                                                        width: pageWidth,
+                                                        height: pageHeight}}).
+                                                        css(pagePosition[(data.display=='double') ? page%2 : 0]);
+    
+                        // Append to this
+                        this.append(data.pageWrap[page]);
+    
+                        // Move data.pageObjs[page] (element) to wrapper
+                        data.pageWrap[page].prepend(data.pageObjs[page]);
+                    }
+    
+                    // If the page is in the current view, create the flip effect
+                    if (!page || turnMethods._setPageLoc.call(this, page)==1)
+                        turnMethods._makeFlip.call(this, page);
+                    
+                } else {
+    
+                    // Place
+                    data.pagePlace[page] = 0;
+    
+                    // Remove element from the DOM
+                    if (data.pageObjs[page])
+                        data.pageObjs[page].remove();
+    
+                }
+    
+        },
+    
+        // Checks if a page is in memory
+        
+        hasPage: function(page) {
+    
+            return page in this.data().pageObjs;
+        
+        },
+    
+        // Prepares the flip effect for a page
+    
+        _makeFlip: function(page) {
+    
+            var data = this.data();
+    
+            if (!data.pages[page] && data.pagePlace[page]==page) {
+    
+                var single = data.display=='single',
+                    even = page%2;
+                
+                data.pages[page] = data.pageObjs[page].
+                                    css({width: (single) ? this.width() : this.width()/2, height: this.height()}).
+                                    flip({page: page,
+                                        next: (single && page === data.totalPages) ? page -1 : ((even || single) ? page+1 : page-1),
+                                        turn: this,
+                                        duration: data.opts.duration,
+                                        acceleration : data.opts.acceleration,
+                                        corners: (single) ? 'all' : ((even) ? 'forward' : 'backward'),
+                                        backGradient: data.opts.gradients,
+                                        frontGradient: data.opts.gradients
+                                        }).
+                                        flip('disable', data.disabled).
+                                        bind('pressed', turnMethods._pressed).
+                                        bind('released', turnMethods._released).
+                                        bind('start', turnMethods._start).
+                                        bind('end', turnMethods._end).
+                                        bind('flip', turnMethods._flip);
+            }
+            return data.pages[page];
+        },
+    
+        // Makes pages within a range
+    
+        _makeRange: function() {
+    
+            var page,
+                data = this.data(),
+                range = this.turn('range');
+    
+                for (page = range[0]; page<=range[1]; page++)
+                    turnMethods._addPage.call(this, page);
+    
+        },
+    
+        // Returns a range of `pagesInDOM` pages that should be in the DOM
+        // Example:
+        // - page of the current view, return true
+        // * page is in the range, return true
+        // 0 page is not in the range, return false
+        //
+        // 1 2-3 4-5 6-7 8-9 10-11 12-13
+        //    **  **  --   **  **
+    
+        range: function(page) {
+    
+            var remainingPages, left, right,
+                data = this.data();
+                page = page || data.tpage || data.page;
+                var view = turnMethods._view.call(this, page);
+    
+                if (page<1 || page>data.totalPages)
+                    throw new Error ('"'+page+'" is not a page for range');
+            
+                view[1] = view[1] || view[0];
+                
+                if (view[0]>=1 && view[1]<=data.totalPages) {
+    
+                    remainingPages = Math.floor((pagesInDOM-2)/2);
+    
+                    if (data.totalPages-view[1] > view[0]) {
+                        left = Math.min(view[0]-1, remainingPages);
+                        right = 2*remainingPages-left;
+                    } else {
+                        right = Math.min(data.totalPages-view[1], remainingPages);
+                        left = 2*remainingPages-right;
+                    }
+    
+                } else {
+                    left = pagesInDOM-1;
+                    right = pagesInDOM-1;
+                }
+    
+                return [Math.max(1, view[0]-left), Math.min(data.totalPages, view[1]+right)];
+    
+        },
+    
+        // Detects if a page is within the range of `pagesInDOM` from the current view
+    
+        _necessPage: function(page) {
+            
+            if (page===0)
+                return true;
+    
+            var range = this.turn('range');
+    
+            return page>=range[0] && page<=range[1];
+            
+        },
+    
+        // Releases memory by removing pages from the DOM
+    
+        _removeFromDOM: function() {
+    
+            var page, data = this.data();
+    
+            for (page in data.pageWrap)
+                if (has(page, data.pageWrap) && !turnMethods._necessPage.call(this, page))
+                    turnMethods._removePageFromDOM.call(this, page);
+            
+    
+        },
+    
+        // Removes a page from DOM and its internal references
+    
+        _removePageFromDOM: function(page) {
+    
+            var data = this.data();
+    
+            if (data.pages[page]) {
+                var dd = data.pages[page].data();
+                if (dd.f && dd.f.fwrapper)
+                    dd.f.fwrapper.remove();
+                data.pages[page].remove();
+                delete data.pages[page];
+            }
+    
+            if (data.pageObjs[page])
+                data.pageObjs[page].remove();
+    
+            if (data.pageWrap[page]) {
+                data.pageWrap[page].remove();
+                delete data.pageWrap[page];
+            }
+    
+            delete data.pagePlace[page];
+    
+        },
+    
+        // Removes a page
+    
+        removePage: function(page) {
+    
+            var data = this.data();
+    
+            if (data.pageObjs[page]) {
+                // Stop animations
+                this.turn('stop');
+    
+                // Remove `page`
+                turnMethods._removePageFromDOM.call(this, page);
+                delete data.pageObjs[page];
+    
+                // Move the pages behind `page`
+                turnMethods._movePages.call(this, page, -1);
+    
+                // Resize the size of this magazine
+                data.totalPages = data.totalPages-1;
+                turnMethods._makeRange.call(this);
+    
+                // Check the current view
+                if (data.page>data.totalPages)
+                    this.turn('page', data.totalPages);
+            }
+    
+            return this;
+        
+        },
+    
+        // Moves pages
+    
+        _movePages: function(from, change) {
+    
+            var page,
+                data = this.data(),
+                single = data.display=='single',
+                move = function(page) {
+    
+                    var next = page + change,
+                        odd = next%2;
+    
+                    if (data.pageObjs[page])
+                        data.pageObjs[next] = data.pageObjs[page].removeClass('page' + page).addClass('page' + next);
+    
+                    if (data.pagePlace[page] && data.pageWrap[page]) {
+                        data.pagePlace[next] = next;
+                        data.pageWrap[next] = data.pageWrap[page].css(pagePosition[(single) ? 0 : odd]).attr('page', next);
+                        
+                        if (data.pages[page])
+                            data.pages[next] = data.pages[page].flip('options', {
+                                page: next,
+                                next: (single || odd) ? next+1 : next-1,
+                                corners: (single) ? 'all' : ((odd) ? 'forward' : 'backward')
+                            });
+    
+                        if (change) {
+                            delete data.pages[page];
+                            delete data.pagePlace[page];
+                            delete data.pageObjs[page];
+                            delete data.pageWrap[page];
+                            delete data.pageObjs[page];
+                        }
+                }
+            };
+    
+            if (change>0)
+                for (page=data.totalPages; page>=from; page--) move(page);
+            else
+                for (page=from; page<=data.totalPages; page++) move(page);
+    
+        },
+    
+        // Sets or Gets the display mode
+    
+        display: function(display) {
+    
+            var data = this.data(),
+                currentDisplay = data.display;
+    
+            if (display) {
+    
+                if ($.inArray(display, displays)==-1)
+                    throw new Error ('"'+display + '" is not a value for display');
+                
+                if (display=='single') {
+                    if (!data.pageObjs[0]) {
+                        this.turn('stop').
+                            css({'overflow': 'hidden'});
+                        data.pageObjs[0] = $('<div />', {'class': 'turn-page p-temporal'}).
+                                        css({width: this.width(), height: this.height()}).
+                                            appendTo(this);
+                    }
+                } else {
+                    if (data.pageObjs[0]) {
+                        this.turn('stop').
+                            css({'overflow': ''});
+                        data.pageObjs[0].remove();
+                        delete data.pageObjs[0];
+                    }
+                }
+    
+                data.display = display;
+    
+                if (currentDisplay) {
+                    var size = this.turn('size');
+                    turnMethods._movePages.call(this, 1, 0);
+                    this.turn('size', size.width, size.height).
+                            turn('update');
+                }
+    
+                return this;
+    
+            } else
+                return currentDisplay;
+        
+        },
+    
+        // Detects if the pages are being animated
+    
+        animating: function() {
+    
+            return this.data().pageMv.length>0;
+    
+        },
+    
+        // Disables and enables the effect
+    
+        disable: function(bool) {
+    
+            var page,
+                data = this.data(),
+                view = this.turn('view');
+    
+                data.disabled = bool===undefined || bool===true;
+    
+            for (page in data.pages)
+                if (has(page, data.pages))
+                    data.pages[page].flip('disable', bool ? $.inArray(page, view) : false );
+    
+            return this;
+    
+        },
+    
+        // Gets and sets the size
+    
+        size: function(width, height) {
+    
+            if (width && height) {
+    
+                var data = this.data(), pageWidth = (data.display=='double') ? width/2 : width, page;
+    
+                this.css({width: width, height: height});
+    
+                if (data.pageObjs[0])
+                    data.pageObjs[0].css({width: pageWidth, height: height});
+                
+                for (page in data.pageWrap) {
+                    if (!has(page, data.pageWrap)) continue;
+                    data.pageObjs[page].css({width: pageWidth, height: height});
+                    data.pageWrap[page].css({width: pageWidth, height: height});
+                    if (data.pages[page])
+                        data.pages[page].css({width: pageWidth, height: height});
+                }
+    
+                this.turn('resize');
+    
+                return this;
+    
+            } else {
+                
+                return {width: this.width(), height: this.height()};
+    
+            }
+        },
+    
+        // Resizes each page
+    
+        resize: function() {
+    
+            var page, data = this.data();
+    
+            if (data.pages[0]) {
+                data.pageWrap[0].css({left: -this.width()});
+                data.pages[0].flip('resize', true);
+            }
+    
+            for (page = 1; page <= data.totalPages; page++)
+                if (data.pages[page])
+                    data.pages[page].flip('resize', true);
+    
+    
+        },
+    
+        // Removes an animation from the cache
+    
+        _removeMv: function(page) {
+    
+            var i, data = this.data();
+                
+            for (i=0; i<data.pageMv.length; i++)
+                if (data.pageMv[i]==page) {
+                    data.pageMv.splice(i, 1);
+                    return true;
+                }
+    
+            return false;
+    
+        },
+    
+        // Adds an animation to the cache
+        
+        _addMv: function(page) {
+    
+            var data = this.data();
+    
+            turnMethods._removeMv.call(this, page);
+            data.pageMv.push(page);
+    
+        },
+    
+        // Gets indexes for a view
+    
+        _view: function(page) {
+        
+            var data = this.data();
+            page = page || data.page;
+    
+            if (data.display=='double')
+                return (page%2) ? [page-1, page] : [page, page+1];
+            else
+                return [page];
+    
+        },
+    
+        // Gets a view
+    
+        view: function(page) {
+    
+            var data = this.data(), view = turnMethods._view.call(this, page);
+    
+            return (data.display=='double') ? [(view[0]>0) ? view[0] : 0, (view[1]<=data.totalPages) ? view[1] : 0]
+                    : [(view[0]>0 && view[0]<=data.totalPages) ? view[0] : 0];
+    
+        },
+    
+        // Stops animations
+    
+        stop: function(ok) {
+    
+            var i, opts, data = this.data(), pages = data.pageMv;
+    
+            data.pageMv = [];
+    
+            if (data.tpage) {
+                data.page = data.tpage;
+                delete data['tpage'];
+            }
+    
+            for (i in pages) {
+                if (!has(i, pages)) continue;
+                opts = data.pages[pages[i]].data().f.opts;
+                flipMethods._moveFoldingPage.call(data.pages[pages[i]], null);
+                data.pages[pages[i]].flip('hideFoldedPage');
+                data.pagePlace[opts.next] = opts.next;
+                
+                if (opts.force) {
+                    opts.next = (opts.page%2===0) ? opts.page-1 : opts.page+1;
+                    delete opts['force'];
+                }
+    
+            }
+    
+            this.turn('update');
+    
+            return this;
+        },
+    
+        // Gets and sets the number of pages
+    
+        pages: function(pages) {
+    
+            var data = this.data();
+    
+            if (pages) {
+                if (pages<data.totalPages) {
+    
+                    for (var page = pages+1; page<=data.totalPages; page++)
+                        this.turn('removePage', page);
+    
+                    if (this.turn('page')>pages)
+                        this.turn('page', pages);
+                }
+    
+                data.totalPages = pages;
+    
+                return this;
+            } else
+                return data.totalPages;
+    
+        },
+    
+        // Sets a page without effect
+    
+        _fitPage: function(page, ok) {
+            
+            var data = this.data(), newView = this.turn('view', page);
+            
+            if (data.page!=page) {
+                this.trigger('turning', [page, newView]);
+                if ($.inArray(1, newView)!=-1) this.trigger('first');
+                if ($.inArray(data.totalPages, newView)!=-1) this.trigger('last');
+            }
+    
+            if (!data.pageObjs[page])
+                return;
+    
+            data.tpage = page;
+    
+            this.turn('stop', ok);
+            turnMethods._removeFromDOM.call(this);
+            turnMethods._makeRange.call(this);
+            this.trigger('turned', [page, newView]);
+    
+        },
+        
+        // Turns to a page
+    
+        _turnPage: function(page) {
+    
+            var current, next,
+                data = this.data(),
+                view = this.turn('view'),
+                newView = this.turn('view', page);
+        
+            if (data.page!=page) {
+                this.trigger('turning', [page, newView]);
+                if ($.inArray(1, newView)!=-1) this.trigger('first');
+                if ($.inArray(data.totalPages, newView)!=-1) this.trigger('last');
+            }
+    
+            if (!data.pageObjs[page])
+                return;
+    
+            data.tpage = page;
+    
+            this.turn('stop');
+    
+            turnMethods._makeRange.call(this);
+    
+            if (data.display=='single') {
+                current = view[0];
+                next = newView[0];
+            } else if (view[1] && page>view[1]) {
+                current = view[1];
+                next = newView[0];
+            } else if (view[0] && page<view[0]) {
+                current = view[0];
+                next = newView[1];
+            }
+    
+            if (data.pages[current]) {
+    
+                var opts = data.pages[current].data().f.opts;
+                data.tpage = next;
+                
+                if (opts.next!=next) {
+                    opts.next = next;
+                    data.pagePlace[next] = opts.page;
+                    opts.force = true;
+                }
+    
+                if (data.display=='single')
+                    data.pages[current].flip('turnPage', (newView[0] > view[0]) ? 'br' : 'bl');
+                else
+                    data.pages[current].flip('turnPage');
+            }
+    
+        },
+    
+        // Gets and sets a page
+    
+        page: function(page) {
+    
+            page = parseInt(page, 10);
+    
+            var data = this.data();
+    
+            if (page>0 && page<=data.totalPages) {
+                if (!data.done || $.inArray(page, this.turn('view'))!=-1)
+                    turnMethods._fitPage.call(this, page);
+                else
+                    turnMethods._turnPage.call(this, page);
+            
+                return this;
+    
+            } else
+                return data.page;
+        
+        },
+    
+        // Turns to the next view
+    
+        next: function() {
+    
+            var data = this.data();
+            return this.turn('page', turnMethods._view.call(this, data.page).pop() + 1);
+        
+        },
+    
+        // Turns to the previous view
+    
+        previous: function() {
+            
+            var data = this.data();
+            return this.turn('page', turnMethods._view.call(this, data.page).shift() - 1);
+    
+        },
+    
+        // Adds a motion to the internal list
+    
+        _addMotionPage: function() {
+    
+            var opts = $(this).data().f.opts,
+                turn = opts.turn,
+                dd = turn.data();
+    
+            opts.pageMv = opts.page;
+            turnMethods._addMv.call(turn, opts.pageMv);
+            dd.pagePlace[opts.next] = opts.page;
+            turn.turn('update');
+    
+        },
+    
+        // This event is called in context of flip
+    
+        _start: function(e, opts, corner) {
+    
+                var data = opts.turn.data(),
+                    event = $.Event('start');
+    
+                e.stopPropagation();
+    
+                opts.turn.trigger(event, [opts, corner]);
+    
+                if (event.isDefaultPrevented()) {
+                    e.preventDefault();
+                    return;
+                }
+            
+            if (data.display=='single') {
+    
+                var left = corner.charAt(1)=='l';
+                if ((opts.page==1 && left) || (opts.page==data.totalPages && !left))
+                    e.preventDefault();
+                else {
+                    if (left) {
+                        opts.next = (opts.next<opts.page) ? opts.next : opts.page-1;
+                        opts.force = true;
+                    } else
+                        opts.next = (opts.next>opts.page) ? opts.next : opts.page+1;
+                }
+    
+            }
+    
+            turnMethods._addMotionPage.call(this);
+        },
+    
+        // This event is called in context of flip
+    
+        _end: function(e, turned) {
+            
+            var that = $(this),
+                data = that.data().f,
+                opts = data.opts,
+                turn = opts.turn,
+                dd = turn.data();
+    
+            e.stopPropagation();
+    
+            if (turned || dd.tpage) {
+    
+                if (dd.tpage==opts.next || dd.tpage==opts.page) {
+                    delete dd['tpage'];
+                    turnMethods._fitPage.call(turn, dd.tpage || opts.next, true);
+                }
+    
+            } else {
+                turnMethods._removeMv.call(turn, opts.pageMv);
+                turn.turn('update');
+            }
+            
+        },
+        
+        // This event is called in context of flip
+    
+        _pressed: function() {
+    
+            var page,
+                that = $(this),
+                data = that.data().f,
+                turn = data.opts.turn,
+                pages = turn.data().pages;
+        
+            for (page in pages)
+                if (page!=data.opts.page)
+                    pages[page].flip('disable', true);
+    
+            return data.time = new Date().getTime();
+    
+        },
+    
+        // This event is called in context of flip
+    
+        _released: function(e, point) {
+            
+            var that = $(this),
+                data = that.data().f;
+    
+                e.stopPropagation();
+    
+            if ((new Date().getTime())-data.time<200 || point.x<0 || point.x>$(this).width()) {
+                e.preventDefault();
+                data.opts.turn.data().tpage = data.opts.next;
+                data.opts.turn.turn('update');
+                $(that).flip('turnPage');
+            }
+    
+        },
+    
+        // This event is called in context of flip
+        
+        _flip: function() {
+    
+            var opts = $(this).data().f.opts;
+    
+            opts.turn.trigger('turn', [opts.next]);
+    
+        },
+    
+        // Calculate the z-index value for pages during the animation
+    
+        calculateZ: function(mv) {
+    
+            var i, page, nextPage, placePage, dpage,
+                that = this,
+                data = this.data(),
+                view = this.turn('view'),
+                currentPage = view[0] || view[1],
+                r = {pageZ: {}, partZ: {}, pageV: {}},
+    
+                addView = function(page) {
+                    var view = that.turn('view', page);
+                    if (view[0]) r.pageV[view[0]] = true;
+                    if (view[1]) r.pageV[view[1]] = true;
+                };
+            
+                for (i = 0; i<mv.length; i++) {
+                    page = mv[i];
+                    nextPage = data.pages[page].data().f.opts.next;
+                    placePage = data.pagePlace[page];
+                    addView(page);
+                    addView(nextPage);
+                    dpage = (data.pagePlace[nextPage]==nextPage) ? nextPage : page;
+                    r.pageZ[dpage] = data.totalPages - Math.abs(currentPage-dpage);
+                    r.partZ[placePage] = data.totalPages*2 + Math.abs(currentPage-dpage);
+                }
+    
+            return r;
+        },
+    
+        // Updates the z-index and display property of every page
+    
+        update: function() {
+    
+            var page,
+                data = this.data();
+    
+            if (data.pageMv.length && data.pageMv[0]!==0) {
+    
+                // Update motion
+    
+                var apage,
+                    pos = this.turn('calculateZ', data.pageMv),
+                    view = this.turn('view', data.tpage);
+            
+                if (data.pagePlace[view[0]]==view[0]) apage = view[0];
+                else if (data.pagePlace[view[1]]==view[1]) apage = view[1];
+            
+                for (page in data.pageWrap) {
+    
+                    if (!has(page, data.pageWrap)) continue;
+    
+                    data.pageWrap[page].css({display: (pos.pageV[page]) ? '' : 'none', 'z-index': pos.pageZ[page] || 0});
+    
+                    if (data.pages[page]) {
+                        data.pages[page].flip('z', pos.partZ[page] || null);
+    
+                        if (pos.pageV[page])
+                            data.pages[page].flip('resize');
+    
+                        if (data.tpage)
+                            data.pages[page].flip('disable', true); // data.disabled || page!=apage
+                    }
+                }
+                    
+            } else {
+    
+                // Update static pages
+    
+                for (page in data.pageWrap) {
+                    if (!has(page, data.pageWrap)) continue;
+                        var pageLocation = turnMethods._setPageLoc.call(this, page);
+                        if (data.pages[page])
+                            data.pages[page].flip('disable', data.disabled || pageLocation!=1).flip('z', null);
+                }
+            }
+        },
+    
+        // Sets the z-index and display property of a page
+        // It depends on the current view
+    
+        _setPageLoc: function(page) {
+    
+            var data = this.data(),
+                view = this.turn('view');
+    
+            if (page==view[0] || page==view[1]) {
+                data.pageWrap[page].css({'z-index': data.totalPages, display: ''});
+                return 1;
+            } else if ((data.display=='single' && page==view[0]+1) || (data.display=='double' && page==view[0]-2 || page==view[1]+2)) {
+                data.pageWrap[page].css({'z-index': data.totalPages-1, display: ''});
+                return 2;
+            } else {
+                data.pageWrap[page].css({'z-index': 0, display: 'none'});
+                return 0;
+            }
+        }
+    },
+    
+    // Methods and properties for the flip page effect
+    
+    flipMethods = {
+    
+        // Constructor
+    
+        init: function(opts) {
+    
+            if (opts.gradients) {
+                opts.frontGradient = true;
+                opts.backGradient = true;
+            }
+    
+            this.data({f: {}});
+            this.flip('options', opts);
+    
+            flipMethods._addPageWrapper.call(this);
+    
+            return this;
+        },
+    
+        setData: function(d) {
+            
+            var data = this.data();
+    
+            data.f = $.extend(data.f, d);
+    
+            return this;
+        },
+    
+        options: function(opts) {
+            
+            var data = this.data().f;
+    
+            if (opts) {
+                flipMethods.setData.call(this, {opts: $.extend({}, data.opts || flipOptions, opts) });
+                return this;
+            } else
+                return data.opts;
+    
+        },
+    
+        z: function(z) {
+    
+            var data = this.data().f;
+            data.opts['z-index'] = z;
+            data.fwrapper.css({'z-index': z || parseInt(data.parent.css('z-index'), 10) || 0});
+    
+            return this;
+        },
+    
+        _cAllowed: function() {
+    
+            return corners[this.data().f.opts.corners] || this.data().f.opts.corners;
+    
+        },
+    
+        _cornerActivated: function(e) {
+            if (e.originalEvent === undefined) {
+                return false;
+            }		
+    
+            e = (isTouch) ? e.originalEvent.touches : [e];
+    
+            var data = this.data().f,
+                pos = data.parent.offset(),
+                width = this.width(),
+                height = this.height(),
+                c = {x: Math.max(0, e[0].pageX-pos.left), y: Math.max(0, e[0].pageY-pos.top)},
+                csz = data.opts.cornerSize,
+                allowedCorners = flipMethods._cAllowed.call(this);
+    
+                if (c.x<=0 || c.y<=0 || c.x>=width || c.y>=height) return false;
+    
+                if (c.y<csz) c.corner = 't';
+                else if (c.y>=height-csz) c.corner = 'b';
+                else return false;
+                
+                if (c.x<=csz) c.corner+= 'l';
+                else if (c.x>=width-csz) c.corner+= 'r';
+                else return false;
+    
+            return ($.inArray(c.corner, allowedCorners)==-1) ? false : c;
+    
+        },
+    
+        _c: function(corner, opts) {
+    
+            opts = opts || 0;
+            return ({tl: point2D(opts, opts),
+                    tr: point2D(this.width()-opts, opts),
+                    bl: point2D(opts, this.height()-opts),
+                    br: point2D(this.width()-opts, this.height()-opts)})[corner];
+    
+        },
+    
+        _c2: function(corner) {
+    
+            return {tl: point2D(this.width()*2, 0),
+                    tr: point2D(-this.width(), 0),
+                    bl: point2D(this.width()*2, this.height()),
+                    br: point2D(-this.width(), this.height())}[corner];
+    
+        },
+    
+        _foldingPage: function(corner) {
+    
+            var opts = this.data().f.opts;
+            
+            if (opts.folding) return opts.folding;
+            else if(opts.turn) {
+                var data = opts.turn.data();
+                if (data.display == 'single')
+                    return (data.pageObjs[opts.next]) ? data.pageObjs[0] : null;
+                else
+                    return data.pageObjs[opts.next];
+            }
+    
+        },
+    
+        _backGradient: function() {
+    
+            var data =	this.data().f,
+                turn = data.opts.turn,
+                gradient = data.opts.backGradient &&
+                            (!turn || turn.data().display=='single' || (data.opts.page!=2 && data.opts.page!=turn.data().totalPages-1) );
+    
+    
+            if (gradient && !data.bshadow)
+                data.bshadow = $('<div/>', divAtt(0, 0, 1)).
+                    css({'position': '', width: this.width(), height: this.height()}).
+                        appendTo(data.parent);
+    
+            return gradient;
+    
+        },
+    
+        resize: function(full) {
+            
+            var data = this.data().f,
+                width = this.width(),
+                height = this.height(),
+                size = Math.round(Math.sqrt(Math.pow(width, 2)+Math.pow(height, 2)));
+    
+            if (full) {
+                data.wrapper.css({width: size, height: size});
+                data.fwrapper.css({width: size, height: size}).
+                    children(':first-child').
+                        css({width: width, height: height});
+    
+                data.fpage.css({width: height, height: width});
+    
+                if (data.opts.frontGradient)
+                    data.ashadow.css({width: height, height: width});
+    
+                if (flipMethods._backGradient.call(this))
+                    data.bshadow.css({width: width, height: height});
+            }
+    
+            if (data.parent.is(':visible')) {
+                data.fwrapper.css({top: data.parent.offset().top,
+                    left: data.parent.offset().left});
+    
+                if (data.opts.turn)
+                    data.fparent.css({top: -data.opts.turn.offset().top, left: -data.opts.turn.offset().left});
+            }
+    
+            this.flip('z', data.opts['z-index']);
+    
+        },
+    
+        // Prepares the page by adding a general wrapper and another objects
+    
+        _addPageWrapper: function() {
+    
+            var att,
+                data = this.data().f,
+                parent = this.parent();
+    
+            if (!data.wrapper) {
+    
+                var left = this.css('left'),
+                    top = this.css('top'),
+                    width = this.width(),
+                    height = this.height(),
+                    size = Math.round(Math.sqrt(Math.pow(width, 2)+Math.pow(height, 2)));
+                
+                data.parent = parent;
+                data.fparent = (data.opts.turn) ? data.opts.turn.data().fparent : $('#turn-fwrappers');
+    
+                if (!data.fparent) {
+                    var fparent = $('<div/>', {css: {'pointer-events': 'none'}}).hide();
+                        fparent.data().flips = 0;
+    
+                    if (data.opts.turn) {
+                        fparent.css(divAtt(-data.opts.turn.offset().top, -data.opts.turn.offset().left, 'auto', 'visible').css).
+                                appendTo(data.opts.turn);
+                        
+                        data.opts.turn.data().fparent = fparent;
+                    } else {
+                        fparent.css(divAtt(0, 0, 'auto', 'visible').css).
+                            attr('id', 'turn-fwrappers').
+                                appendTo($('body'));
+                    }
+    
+                    data.fparent = fparent;
+                }
+    
+                this.css({position: 'absolute', top: 0, left: 0, bottom: 'auto', right: 'auto'});
+    
+                data.wrapper = $('<div/>', divAtt(0, 0, this.css('z-index'))).
+                                    appendTo(parent).
+                                        prepend(this);
+    
+                data.fwrapper = $('<div/>', divAtt(parent.offset().top, parent.offset().left)).
+                                    hide().
+                                        appendTo(data.fparent);
+    
+                data.fpage = $('<div/>', {css: {cursor: 'default'}}).
+                        appendTo($('<div/>', divAtt(0, 0, 0, 'visible')).
+                                    appendTo(data.fwrapper));
+    
+                if (data.opts.frontGradient)
+                    data.ashadow = $('<div/>', divAtt(0, 0,  1)).
+                        appendTo(data.fpage);
+    
+                // Save data
+    
+                flipMethods.setData.call(this, data);
+    
+                // Set size
+                flipMethods.resize.call(this, true);
+            }
+    
+        },
+    
+        // Takes a 2P point from the screen and applies the transformation
+    
+        _fold: function(point) {
+    
+            var that = this,
+                a = 0,
+                alpha = 0,
+                beta,
+                px,
+                gradientEndPointA,
+                gradientEndPointB,
+                gradientStartV,
+                gradientSize,
+                gradientOpacity,
+                mv = point2D(0, 0),
+                df = point2D(0, 0),
+                tr = point2D(0, 0),
+                width = this.width(),
+                height = this.height(),
+                folding = flipMethods._foldingPage.call(this),
+                tan = Math.tan(alpha),
+                data = this.data().f,
+                ac = data.opts.acceleration,
+                h = data.wrapper.height(),
+                o = flipMethods._c.call(this, point.corner),
+                top = point.corner.substr(0, 1) == 't',
+                left = point.corner.substr(1, 1) == 'l',
+    
+                compute = function() {
+                    var rel = point2D((o.x) ? o.x - point.x : point.x, (o.y) ? o.y - point.y : point.y),
+                        tan = (Math.atan2(rel.y, rel.x)),
+                        middle;
+    
+                    alpha = A90 - tan;
+                    a = deg(alpha);
+                    middle = point2D((left) ? width - rel.x/2 : point.x + rel.x/2, rel.y/2);
+    
+                    var gamma = alpha - Math.atan2(middle.y, middle.x),
+                        distance =  Math.max(0, Math.sin(gamma) * Math.sqrt(Math.pow(middle.x, 2) + Math.pow(middle.y, 2)));
+    
+                        tr = point2D(distance * Math.sin(alpha), distance * Math.cos(alpha));
+    
+                        if (alpha > A90) {
+                        
+                            tr.x = tr.x + Math.abs(tr.y * Math.tan(tan));
+                            tr.y = 0;
+    
+                            if (Math.round(tr.x*Math.tan(PI-alpha)) < height) {
+    
+                                point.y = Math.sqrt(Math.pow(height, 2)+2 * middle.x * rel.x);
+                                if (top) point.y =  height - point.y;
+                                return compute();
+    
+                            }
+                        }
+                
+                    if (alpha>A90) {
+                        var beta = PI-alpha, dd = h - height/Math.sin(beta);
+                        mv = point2D(Math.round(dd*Math.cos(beta)), Math.round(dd*Math.sin(beta)));
+                        if (left) mv.x = - mv.x;
+                        if (top) mv.y = - mv.y;
+                    }
+    
+                    px = Math.round(tr.y/Math.tan(alpha) + tr.x);
+                
+                    var side = width - px,
+                        sideX = side*Math.cos(alpha*2),
+                        sideY = side*Math.sin(alpha*2);
+                        df = point2D(Math.round( (left ? side -sideX : px+sideX)), Math.round((top) ? sideY : height - sideY));
+                        
+                    
+                    // GRADIENTS
+    
+                        gradientSize = side*Math.sin(alpha);
+                            var endingPoint = flipMethods._c2.call(that, point.corner),
+                            far = Math.sqrt(Math.pow(endingPoint.x-point.x, 2)+Math.pow(endingPoint.y-point.y, 2));
+    
+                        gradientOpacity = (far<width) ? far/width : 1;
+    
+    
+                    if (data.opts.frontGradient) {
+    
+                        gradientStartV = gradientSize>100 ? (gradientSize-100)/gradientSize : 0;
+                        gradientEndPointA = point2D(gradientSize*Math.sin(A90-alpha)/height*100, gradientSize*Math.cos(A90-alpha)/width*100);
+                    
+                        if (top) gradientEndPointA.y = 100-gradientEndPointA.y;
+                        if (left) gradientEndPointA.x = 100-gradientEndPointA.x;
+                    }
+    
+                    if (flipMethods._backGradient.call(that)) {
+    
+                        gradientEndPointB = point2D(gradientSize*Math.sin(alpha)/width*100, gradientSize*Math.cos(alpha)/height*100);
+                        if (!left) gradientEndPointB.x = 100-gradientEndPointB.x;
+                        if (!top) gradientEndPointB.y = 100-gradientEndPointB.y;
+                    }
+                    //
+    
+                    tr.x = Math.round(tr.x);
+                    tr.y = Math.round(tr.y);
+    
+                    return true;
+                },
+    
+                transform = function(tr, c, x, a) {
+                
+                    var f = ['0', 'auto'], mvW = (width-h)*x[0]/100, mvH = (height-h)*x[1]/100,
+                        v = {left: f[c[0]], top: f[c[1]], right: f[c[2]], bottom: f[c[3]]},
+                        aliasingFk = (a!=90 && a!=-90) ? (left ? -1 : 1) : 0;
+    
+                        x = x[0] + '% ' + x[1] + '%';
+    
+                    that.css(v).transform(rotate(a) + translate(tr.x + aliasingFk, tr.y, ac), x);
+    
+                    data.fpage.parent().css(v);
+                    data.wrapper.transform(translate(-tr.x + mvW-aliasingFk, -tr.y + mvH, ac) + rotate(-a), x);
+    
+                    data.fwrapper.transform(translate(-tr.x + mv.x + mvW, -tr.y + mv.y + mvH, ac) + rotate(-a), x);
+                    data.fpage.parent().transform(rotate(a) + translate(tr.x + df.x - mv.x, tr.y + df.y - mv.y, ac), x);
+    
+                    if (data.opts.frontGradient)
+                        gradient(data.ashadow,
+                                point2D(left?100:0, top?100:0),
+                                point2D(gradientEndPointA.x, gradientEndPointA.y),
+                                [[gradientStartV, 'rgba(0,0,0,0)'],
+                                [((1-gradientStartV)*0.8)+gradientStartV, 'rgba(0,0,0,'+(0.2*gradientOpacity)+')'],
+                                [1, 'rgba(255,255,255,'+(0.2*gradientOpacity)+')']],
+                                3,
+                                alpha);
+            
+                    if (flipMethods._backGradient.call(that))
+                        gradient(data.bshadow,
+                                point2D(left?0:100, top?0:100),
+                                point2D(gradientEndPointB.x, gradientEndPointB.y),
+                                [[0.8, 'rgba(0,0,0,0)'],
+                                [1, 'rgba(0,0,0,'+(0.3*gradientOpacity)+')'],
+                                [1, 'rgba(0,0,0,0)']],
+                                3);
+                    
+                };
+    
+            switch (point.corner) {
+                case 'tl' :
+                    point.x = Math.max(point.x, 1);
+                    compute();
+                    transform(tr, [1,0,0,1], [100, 0], a);
+                    data.fpage.transform(translate(-height, -width, ac) + rotate(90-a*2) , '100% 100%');
+                    folding.transform(rotate(90) + translate(0, -height, ac), '0% 0%');
+                break;
+                case 'tr' :
+                    point.x = Math.min(point.x, width-1);
+                    compute();
+                    transform(point2D(-tr.x, tr.y), [0,0,0,1], [0, 0], -a);
+                    data.fpage.transform(translate(0, -width, ac) + rotate(-90+a*2) , '0% 100%');
+                    folding.transform(rotate(270) + translate(-width, 0, ac), '0% 0%');
+                break;
+                case 'bl' :
+                    point.x = Math.max(point.x, 1);
+                    compute();
+                    transform(point2D(tr.x, -tr.y), [1,1,0,0], [100, 100], -a);
+                    data.fpage.transform(translate(-height, 0, ac) + rotate(-90+a*2), '100% 0%');
+                    folding.transform(rotate(270) + translate(-width, 0, ac), '0% 0%');
+                break;
+                case 'br' :
+                    point.x = Math.min(point.x, width-1);
+                    compute();
+                    transform(point2D(-tr.x, -tr.y), [0,1,1,0], [0, 100], a);
+                    data.fpage.transform(rotate(90-a*2), '0% 0%');
+                    folding.transform(rotate(90) + translate(0, -height, ac), '0% 0%');
+    
+                break;
+            }
+    
+            data.point = point;
+        
+        },
+    
+        _moveFoldingPage: function(bool) {
+    
+            var data = this.data().f,
+                folding = flipMethods._foldingPage.call(this);
+    
+            if (folding) {
+                if (bool) {
+                    if (!data.fpage.children()[data.ashadow? '1' : '0']) {
+                        flipMethods.setData.call(this, {backParent: folding.parent()});
+                        data.fpage.prepend(folding);
+                    }
+                } else {
+                    if (data.backParent)
+                        data.backParent.prepend(folding);
+    
+                }
+            }
+    
+        },
+    
+        _showFoldedPage: function(c, animate) {
+    
+            var folding = flipMethods._foldingPage.call(this),
+                dd = this.data(),
+                data = dd.f;
+    
+            if (!data.point || data.point.corner!=c.corner) {
+                var event = $.Event('start');
+                this.trigger(event, [data.opts, c.corner]);
+    
+                if (event.isDefaultPrevented())
+                    return false;
+            }
+    
+    
+            if (folding) {
+    
+                if (animate) {
+    
+                    var that = this, point = (data.point && data.point.corner==c.corner) ? data.point : flipMethods._c.call(this, c.corner, 1);
+                
+                    this.animatef({from: [point.x, point.y], to:[c.x, c.y], duration: 500, frame: function(v) {
+                        c.x = Math.round(v[0]);
+                        c.y = Math.round(v[1]);
+                        flipMethods._fold.call(that, c);
+                    }});
+    
+                } else	{
+    
+                    flipMethods._fold.call(this, c);
+                    if (dd.effect && !dd.effect.turning)
+                        this.animatef(false);
+    
+                }
+    
+                if (!data.fwrapper.is(':visible')) {
+                    data.fparent.show().data().flips++;
+                    flipMethods._moveFoldingPage.call(this, true);
+                    data.fwrapper.show();
+    
+                    if (data.bshadow)
+                        data.bshadow.show();
+                }
+    
+                return true;
+            }
+    
+            return false;
+        },
+    
+        hide: function() {
+    
+            var data = this.data().f,
+                folding = flipMethods._foldingPage.call(this);
+    
+            if ((--data.fparent.data().flips)===0)
+                data.fparent.hide();
+    
+            this.css({left: 0, top: 0, right: 'auto', bottom: 'auto'}).transform('', '0% 100%');
+    
+            data.wrapper.transform('', '0% 100%');
+    
+            data.fwrapper.hide();
+    
+            if (data.bshadow)
+                data.bshadow.hide();
+    
+            folding.transform('', '0% 0%');
+    
+            return this;
+        },
+    
+        hideFoldedPage: function(animate) {
+    
+            var data = this.data().f;
+    
+            if (!data.point) return;
+    
+            var that = this,
+                p1 = data.point,
+                hide = function() {
+                    data.point = null;
+                    that.flip('hide');
+                    that.trigger('end', [false]);
+                };
+    
+            if (animate) {
+                var p4 = flipMethods._c.call(this, p1.corner),
+                    top = (p1.corner.substr(0,1)=='t'),
+                    delta = (top) ? Math.min(0, p1.y-p4.y)/2 : Math.max(0, p1.y-p4.y)/2,
+                    p2 = point2D(p1.x, p1.y+delta),
+                    p3 = point2D(p4.x, p4.y-delta);
+            
+                this.animatef({
+                    from: 0,
+                    to: 1,
+                    frame: function(v) {
+                        var np = bezier(p1, p2, p3, p4, v);
+                        p1.x = np.x;
+                        p1.y = np.y;
+                        flipMethods._fold.call(that, p1);
+                    },
+                    complete: hide,
+                    duration: 800,
+                    hiding: true
+                    });
+    
+            } else {
+                this.animatef(false);
+                hide();
+            }
+        },
+    
+        turnPage: function(corner) {
+    
+            var that = this,
+                data = this.data().f;
+    
+            corner = {corner: (data.corner) ? data.corner.corner : corner || flipMethods._cAllowed.call(this)[0]};
+    
+            var p1 = data.point || flipMethods._c.call(this, corner.corner, (data.opts.turn) ? data.opts.turn.data().opts.elevation : 0),
+                p4 = flipMethods._c2.call(this, corner.corner);
+    
+                this.trigger('flip').
+                    animatef({
+                        from: 0,
+                        to: 1,
+                        frame: function(v) {
+                            var np = bezier(p1, p1, p4, p4, v);
+                            corner.x = np.x;
+                            corner.y = np.y;
+                            flipMethods._showFoldedPage.call(that, corner);
+                        },
+                        
+                        complete: function() {
+                            that.trigger('end', [true]);
+                        },
+                        duration: data.opts.duration,
+                        turning: true
+                    });
+    
+                data.corner = null;
+        },
+    
+        moving: function() {
+    
+            return 'effect' in this.data();
+        
+        },
+    
+        isTurning: function() {
+    
+            return this.flip('moving') && this.data().effect.turning;
+        
+        },
+    
+        _eventStart: function(e) {
+    
+            var data = this.data().f;
+    
+            if (!data.disabled && !this.flip('isTurning')) {
+                data.corner = flipMethods._cornerActivated.call(this, e);
+                if (data.corner && flipMethods._foldingPage.call(this, data.corner)) {
+                    flipMethods._moveFoldingPage.call(this, true);
+                    this.trigger('pressed', [data.point]);
+                    return false;
+                } else
+                    data.corner = null;
+            }
+    
+        },
+    
+        _eventMove: function(e) {
+    
+            var data = this.data().f;
+    
+            if (!data.disabled) {
+                e = (isTouch) ? e.originalEvent.touches : [e];
+            
+                if (data.corner) {
+    
+                    var pos = data.parent.offset();
+    
+                    data.corner.x = e[0].pageX-pos.left;
+                    data.corner.y = e[0].pageY-pos.top;
+    
+                    flipMethods._showFoldedPage.call(this, data.corner);
+                
+                } else if (!this.data().effect && this.is(':visible')) { // roll over
+                    
+                    var corner = flipMethods._cornerActivated.call(this, e[0]);
+                    if (corner) {
+                        var origin = flipMethods._c.call(this, corner.corner, data.opts.cornerSize/2);
+                        corner.x = origin.x;
+                        corner.y = origin.y;
+                        flipMethods._showFoldedPage.call(this, corner, true);
+                    } else
+                        flipMethods.hideFoldedPage.call(this, true);
+    
+                }
+            }
+        },
+    
+        _eventEnd: function() {
+    
+            var data = this.data().f;
+    
+            if (!data.disabled && data.point) {
+                var event = $.Event('released');
+                this.trigger(event, [data.point]);
+                if (!event.isDefaultPrevented())
+                    flipMethods.hideFoldedPage.call(this, true);
+            }
+    
+            data.corner = null;
+    
+        },
+    
+        disable: function(disable) {
+    
+            flipMethods.setData.call(this, {'disabled': disable});
+            return this;
+    
+        }
+    },
+    
+    cla = function(that, methods, args) {
+    
+        if (!args[0] || typeof(args[0])=='object')
+            return methods.init.apply(that, args);
+        else if(methods[args[0]] && args[0].toString().substr(0, 1)!='_')
+            return methods[args[0]].apply(that, Array.prototype.slice.call(args, 1));
+        else
+            throw args[0] + ' is an invalid value';
+    };
+    
+    $.extend($.fn, {
+    
+        flip: function(req, opts) {
+            return cla(this, flipMethods, arguments);
+        },
+    
+        turn: function(req) {
+            return cla(this, turnMethods, arguments);
+        },
+    
+        transform: function(transform, origin) {
+    
+            var properties = {};
+            
+            if (origin)
+                properties[vendor+'transform-origin'] = origin;
+            
+            properties[vendor+'transform'] = transform;
+        
+            return this.css(properties);
+    
+        },
+    
+        animatef: function(point) {
+    
+            var data = this.data();
+    
+            if (data.effect)
+                clearInterval(data.effect.handle);
+    
+            if (point) {
+    
+                if (!point.to.length) point.to = [point.to];
+                if (!point.from.length) point.from = [point.from];
+                if (!point.easing) point.easing = function (x, t, b, c, data) { return c * Math.sqrt(1 - (t=t/data-1)*t) + b; };
+    
+                var j, diff = [],
+                    len = point.to.length,
+                    that = this,
+                    fps = point.fps || 30,
+                    time = - fps,
+                    f = function() {
+                        var j, v = [];
+                        time = Math.min(point.duration, time + fps);
+        
+                        for (j = 0; j < len; j++)
+                            v.push(point.easing(1, time, point.from[j], diff[j], point.duration));
+    
+                        point.frame((len==1) ? v[0] : v);
+    
+                        if (time==point.duration) {
+                            clearInterval(data.effect.handle);
+                            delete data['effect'];
+                            that.data(data);
+                            if (point.complete)
+                                point.complete();
+                            }
+                        };
+    
+                for (j = 0; j < len; j++)
+                    diff.push(point.to[j] - point.from[j]);
+    
+                data.effect = point;
+                data.effect.handle = setInterval(f, fps);
+                this.data(data);
+                f();
+            } else {
+                delete data['effect'];
+            }
+        }
+    });
+    
+    
+    $.isTouch = isTouch;
+    
+    })(jQuery);

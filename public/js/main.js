@@ -3,7 +3,7 @@ var numberOfPages = 1000;
 //  Side nav
 $(document).ready(function(){
     $('.sidenav').sidenav();
-  });
+ 
 //   $('.sidenav').sidenav('side', left);
     // Adds the pages that the book will need
     function addPage(page, book) {
@@ -64,7 +64,7 @@ $(document).ready(function(){
 
     });
     
-
+});
 //     $(window).width(function(){
 //   var win = $(this); //this = window
 //   if (win.width() >= 820) { book.turn('display','double');}
