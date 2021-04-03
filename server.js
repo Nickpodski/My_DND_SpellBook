@@ -5,7 +5,7 @@ const exphbs = require('express-handlebars');
 const routes = require('./controllers');
 const helpers = require('./utils/helpers');
 const axios = require('axios');
-const herokuURL = 'http://radiant-island-35045.herokuapp.com/'
+const herokuURL = 'http://radiant-island-35045.herokuapp.com'
 
 
 axios.defaults.baseURL = herokuURL;
