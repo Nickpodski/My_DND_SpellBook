@@ -328,12 +328,13 @@ font-weight: bold;
   text-indent: 30px;
 }
 #descTitle {
-  padding: 26px 0px 5px 0px;
+  padding: 25px 0px 0px 84px;
   text-align: center;
   font-size: 15px;
   text-underline-position: under;
   text-decoration-line: underline;
   font-weight: bold;
+  display: -webkit-inline-box;
 }
 /* All Spells Page */
 #desc-info {
@@ -364,14 +365,13 @@ font-weight: bold;
   line-height: 50px;
   padding: 0px 0px 0px 35px;
 }
-.add-btn{
+.add-btn {
   margin-left: 10px;
   border-radius: 10px;
-  border: 3px solid #000000;
-  background: none;
+  border: 3px solid goldenrod;
   padding-bottom: 5px;
-  cursor: pointer;
-  width: 50px;
+  cursor: cell;
+  width: 51px;
   border-width: 2px;
 }
 .desc-title {
