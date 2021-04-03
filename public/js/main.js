@@ -9,7 +9,6 @@ function addSpellButton(spell) {
     axios.put(url,)
       .then(function (res) {
         console.log(res);
-        location.reload();
         return;
       })
       .catch(function (err) {
