@@ -1,7 +1,7 @@
+// const { default: axios } = require("axios");
+
 loginFormHandler = async (event) => {
   event.preventDefault();
-
-
   const email = document.querySelector('#email-login').value.trim();
   const password = document.querySelector('#password-login').value.trim();
   // const book = document.getElementById("book");
@@ -30,20 +30,51 @@ signupFormHandler = async (event) => {
   const spellbook = null;
   
 
-  if (name && email && password) {
-    const response = await fetch('/api/users', {
-      method: 'POST',
-      body: JSON.stringify({ name, email, password, spellbook}),
-      headers: { 'Content-Type': 'application/json' },
-    });
+  // if (name && email && password) {
+  //   const response = await fetch('/api/users', {
+  //     method: 'POST',
+  //     body: JSON.stringify({ name, email, password, spellbook}),
+  //     headers: { 'Content-Type': 'application/json' },
+  //   });
 
-    if (response.ok) {
-      document.location.replace('/');
-    } else {
-      alert(response.statusText);
-    }
-  }
-};
+  //   if (response.ok) {
+  //     document.location.replace('/');
+  //   } else {
+  //     alert(response.statusText);
+  //   }
+  // }
+  if (name && email && password) {
+    // body = JSON.stringify({ name, email, password});
+    // console.log(body);
+    // axios.post('/api/users/', body)
+    //   .then(function (res) {
+    //     console.log(res);
+    //     return;
+    //   })
+    //   .catch(function (err) {
+    //     console.log(err);
+    //     return;
+    // });
+    console.log(name);
+    await axios.post('/api/users', {
+      name: name,
+      email: email,
+      password: password 
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(function (res) {
+        console.log(res);
+        return;
+      })
+      .catch( function (err) {
+        console.log(err);
+        return;
+      })
+}};
 
 
 
