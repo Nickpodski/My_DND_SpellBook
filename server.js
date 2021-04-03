@@ -6,7 +6,7 @@ const routes = require('./controllers');
 const helpers = require('./utils/helpers');
 const axios = require('axios');
 
-axios.defaults.baseURL = process.env.VUE_APP_API_ENDPOINT
+axios.defaults.baseURL = process.env.JAWSDB_URL;
 
 
 const sequelize = require('./config/connection');
