@@ -72,7 +72,7 @@
   </ul>
   <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons" id="menuIcon">menu</i></a>
 
-  <div class="wrapper">
+  <div class="wrapper" style="display: none;">
     <div class="aspect">
       <div class="aspect-inner">
         {{!-- each handlebars page --}}
@@ -94,6 +94,13 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="text/javascript" src="/js/turn.js"></script>
   <script type="text/javascript" src="/js/main.js"></script>
+  <script>
+      $(document).ready(function () {
+        setTimeout(function () {
+          $('.wrapper').show();
+        }, 1000);
+      })
+  </script>
 </body>
 
 </html>
