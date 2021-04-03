@@ -40,6 +40,9 @@ A web application for Dungeons & Dragons players. This application provides the 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)](code_of_conduct.md)
 
 ## Screenshots
+![Capture2](https://user-images.githubusercontent.com/73205731/113464371-15b19a00-93fa-11eb-9004-a13c9cc310d0.PNG)
+![Capture3](https://user-images.githubusercontent.com/73205731/113464372-164a3080-93fa-11eb-8674-cf7ca2070f20.PNG)
+![Capture](https://user-images.githubusercontent.com/73205731/113464373-164a3080-93fa-11eb-8221-262585680b79.PNG)
 
   
 
