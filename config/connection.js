@@ -10,6 +10,7 @@ if (process.env.JAWSDB_URL) {
     process.env.DB_NAME,
     process.env.DB_USER,
     process.env.DB_PASSWORD,
+    process.env.VUE_APP_API_ENDPOINT,
     {
       host: 'localhost',
       dialect: 'mysql',
