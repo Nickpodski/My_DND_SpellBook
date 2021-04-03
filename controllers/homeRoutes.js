@@ -64,7 +64,7 @@ router.get('/all', withAuth, async (req, res) => {
     //     type: QueryTypes.SELECT,
     //     raw: true,
     // });
-    const allClassSpells = await axios.get('/api/spells/all/wizard')
+    const allClassSpells = await axios.get('http://radiant-island-35045.herokuapp.com/api/spells/all/wizard')
       .then(function (res) {
         return res;
       })
