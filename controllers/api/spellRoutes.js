@@ -31,7 +31,7 @@ router.get('/all/:spellClass', async (req, res) => {
     const {spellClass} = req.params;
     const allClassSpells = await sequelize.query(
       'SELECT * FROM spellbook_db.spell WHERE class LIKE :search_class', {
-        replacements: { search_class: `%${spellClass}%`},
+        replacements: { search_class: '%' + spellClass + '%'},
         type: QueryTypes.SELECT
     });
     // Future figure out how to add an error for incorrect class search.
