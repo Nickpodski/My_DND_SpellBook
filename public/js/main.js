@@ -9,6 +9,22 @@ function addSpellButton(spell) {
     axios.put(url,)
       .then(function (res) {
         console.log(res);
+        location.reload();
+        return;
+      })
+      .catch(function (err) {
+          console.log(err);
+          return;
+      });
+    return;
+  }
+  function removeSpellButton(spell) {
+    const spellID = JSON.stringify(spell);
+    const url = '/api/spellbooks/remove/' + spellID;
+    axios.put(url,)
+      .then(function (res) {
+        console.log(res);
+        location.reload();
         return;
       })
       .catch(function (err) {
