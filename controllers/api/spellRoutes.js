@@ -30,8 +30,8 @@ router.get('/all/:spellClass', async (req, res) => {
   try {
     const {spellClass} = req.params;
     const allClassSpells = await sequelize.query(
-      'SELECT * FROM spellbook_db.spell WHERE class LIKE :search_class', {
-        replacements: { search_class: `%${spellClass}%`},
+      'SELECT * FROM cx389k3qd04dh9fh.spell WHERE class LIKE :search_class', {
+        replacements: { search_class: '%' + spellClass + '%'},
         type: QueryTypes.SELECT
     });
     // Future figure out how to add an error for incorrect class search.
@@ -51,7 +51,7 @@ router.get('/spelllevel/:level', async (req, res) => {
   try {
     const {level} = req.params;
     const allClassSpells = await sequelize.query(
-      'SELECT * FROM spellbook_db.spell WHERE level LIKE :search_level', {
+      'SELECT * FROM cx389k3qd04dh9fh.spell WHERE level LIKE :search_level', {
         replacements: { search_level: `${level}`},
         type: QueryTypes.SELECT
     });
@@ -72,7 +72,7 @@ router.get('/castingtime/:action', async (req, res) => {
     const {action} = req.params;
     const actionSTR = action.replace(/_/g, ' ');
     const allSpellCastingTime = await sequelize.query(
-      'SELECT * FROM spellbook_db.spell WHERE casting_time LIKE :search_castingtime', {
+      'SELECT * FROM cx389k3qd04dh9fh.spell WHERE casting_time LIKE :search_castingtime', {
         replacements: { search_castingtime: `${actionSTR}`},
         type: QueryTypes.SELECT
     });
@@ -92,7 +92,7 @@ router.get('/concentration/:search', async (req, res) => {
   try {
     const {search} = req.params;
     const isConcentration = await sequelize.query(
-      'SELECT * FROM spellbook_db.spell WHERE concentration LIKE :search_concentration', {
+      'SELECT * FROM cx389k3qd04dh9fh.spell WHERE concentration LIKE :search_concentration', {
         replacements: { search_concentration: `${search}`},
         type: QueryTypes.SELECT
     });
@@ -112,7 +112,7 @@ router.get('/ritual/:search', async (req, res) => {
   try {
     const {search} = req.params;
     const isRitual = await sequelize.query(
-      'SELECT * FROM spellbook_db.spell WHERE ritual LIKE :search_ritual', {
+      'SELECT * FROM cx389k3qd04dh9fh.spell WHERE ritual LIKE :search_ritual', {
         replacements: { search_ritual: `${search}`},
         type: QueryTypes.SELECT
     });

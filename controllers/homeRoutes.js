@@ -64,7 +64,7 @@ router.get('/all', withAuth, async (req, res) => {
     //     type: QueryTypes.SELECT,
     //     raw: true,
     // });
-    const allClassSpells = await axios.get('/api/spells/all/wizard')
+    const allClassSpells = await axios.get('https://mydndspellbook.herokuapp.com/api/spells/all/wizard')
       .then(function (res) {
         return res;
       })
@@ -91,7 +91,7 @@ router.get('/all', withAuth, async (req, res) => {
     logged_in: req.session.logged_in,
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json();
   }
 });
 
